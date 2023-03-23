@@ -18,6 +18,10 @@
 		854141AD29C9AE2B0063DF27 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854141AC29C9AE2B0063DF27 /* SignupVC.swift */; };
 		854141B029C9AEA00063DF27 /* DataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 854141AE29C9AEA00063DF27 /* DataBase.xcdatamodeld */; };
 		854141B629CA83740063DF27 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854141B529CA83740063DF27 /* API.swift */; };
+		85482A2129CC4AA700F79893 /* SignupNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2029CC4AA700F79893 /* SignupNameVC.swift */; };
+		85482A2329CC4AFD00F79893 /* SignupIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2229CC4AFD00F79893 /* SignupIDVC.swift */; };
+		85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2429CC4B0D00F79893 /* SignupPWVC.swift */; };
+		85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */; };
 		8588874329CAA41100D0CDAA /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874229CAA41100D0CDAA /* Signin.swift */; };
 		8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */; };
 		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; };
@@ -35,6 +39,10 @@
 		854141AC29C9AE2B0063DF27 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		854141AF29C9AEA00063DF27 /* DataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataBase.xcdatamodel; sourceTree = "<group>"; };
 		854141B529CA83740063DF27 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		85482A2029CC4AA700F79893 /* SignupNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVC.swift; sourceTree = "<group>"; };
+		85482A2229CC4AFD00F79893 /* SignupIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupIDVC.swift; sourceTree = "<group>"; };
+		85482A2429CC4B0D00F79893 /* SignupPWVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPWVC.swift; sourceTree = "<group>"; };
+		85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStudentNumberVC.swift; sourceTree = "<group>"; };
 		8588874229CAA41100D0CDAA /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
 		8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDCardVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,20 +86,19 @@
 				8541419429C9A6C50063DF27 /* Assets.xcassets */,
 				8541419629C9A6C50063DF27 /* LaunchScreen.storyboard */,
 				8541419929C9A6C50063DF27 /* Info.plist */,
-				854141AA29C9AC4D0063DF27 /* Obct */,
+				854141AA29C9AC4D0063DF27 /* Objc */,
 				854141B129CA833A0063DF27 /* Extention */,
-				854141AB29C9AD780063DF27 /* login */,
-				8588874429CAA50B00D0CDAA /* Student */,
+				85482A2929CC4BB100F79893 /* Sources */,
 			);
 			path = LetsEatingTime;
 			sourceTree = "<group>";
 		};
-		854141AA29C9AC4D0063DF27 /* Obct */ = {
+		854141AA29C9AC4D0063DF27 /* Objc */ = {
 			isa = PBXGroup;
 			children = (
 				854141A829C9AC4B0063DF27 /* Color.swift */,
 			);
-			path = Obct;
+			path = Objc;
 			sourceTree = "<group>";
 		};
 		854141AB29C9AD780063DF27 /* login */ = {
@@ -99,7 +106,7 @@
 			children = (
 				8541418F29C9A6C50063DF27 /* SigninVC.swift */,
 				8588874229CAA41100D0CDAA /* Signin.swift */,
-				854141AC29C9AE2B0063DF27 /* SignupVC.swift */,
+				85482A2829CC4B7A00F79893 /* Signup */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -110,6 +117,35 @@
 				854141B529CA83740063DF27 /* API.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		85482A2829CC4B7A00F79893 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+				854141AC29C9AE2B0063DF27 /* SignupVC.swift */,
+				85482A2229CC4AFD00F79893 /* SignupIDVC.swift */,
+				85482A2429CC4B0D00F79893 /* SignupPWVC.swift */,
+				85482A2029CC4AA700F79893 /* SignupNameVC.swift */,
+				85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */,
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		85482A2929CC4BB100F79893 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				85482A2A29CC4BF400F79893 /* ViewController */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		85482A2A29CC4BF400F79893 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				854141AB29C9AD780063DF27 /* login */,
+				8588874429CAA50B00D0CDAA /* Student */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		8588874429CAA50B00D0CDAA /* Student */ = {
@@ -203,10 +239,14 @@
 				854141B629CA83740063DF27 /* API.swift in Sources */,
 				8541419029C9A6C50063DF27 /* SigninVC.swift in Sources */,
 				854141AD29C9AE2B0063DF27 /* SignupVC.swift in Sources */,
+				85482A2129CC4AA700F79893 /* SignupNameVC.swift in Sources */,
+				85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */,
 				854141B029C9AEA00063DF27 /* DataBase.xcdatamodeld in Sources */,
+				85482A2329CC4AFD00F79893 /* SignupIDVC.swift in Sources */,
 				854141A929C9AC4B0063DF27 /* Color.swift in Sources */,
 				8541418C29C9A6C50063DF27 /* AppDelegate.swift in Sources */,
 				8541418E29C9A6C50063DF27 /* SceneDelegate.swift in Sources */,
+				85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */,
 				8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */,
 				8588874329CAA41100D0CDAA /* Signin.swift in Sources */,
 			);
