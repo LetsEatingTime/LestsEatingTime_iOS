@@ -15,4 +15,5 @@ struct LoginData: Decodable, Hashable {
 
 struct LoginDatas: Decodable, Hashable {
     let token: String
+    let refrashToken: String
 }
