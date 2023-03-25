@@ -24,7 +24,7 @@
 		85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */; };
 		8588874329CAA41100D0CDAA /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874229CAA41100D0CDAA /* Signin.swift */; };
 		8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */; };
-		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; };
+		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
