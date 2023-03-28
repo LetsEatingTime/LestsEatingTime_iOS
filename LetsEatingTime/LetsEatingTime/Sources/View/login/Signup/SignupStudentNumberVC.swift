@@ -66,7 +66,6 @@ class SignupStudentNumberVC: UIViewController {
             $0.bottom.equalTo(line.snp.top).offset(0.7)
             $0.left.equalToSuperview().offset(70)
             $0.right.equalToSuperview().offset(-70)
-            
         }
     }
 }

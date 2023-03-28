@@ -56,9 +56,6 @@ class SignupVC: UIViewController {
         view.backgroundColor = .white
         setup()
         configureUIView()
-        UIView.animate(withDuration: 1.0) {
-            self.progressView.setProgress(0.25, animated: true)
-        }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -66,7 +63,6 @@ class SignupVC: UIViewController {
 }
 extension SignupVC {
     @objc func didTabsignupNextButton() {
-        //        logViewHierarchy()
         switch children.first {
         case idVC:
             addChild(pwVC)
@@ -150,23 +146,23 @@ extension SignupVC {
         let name = nameVC.nameTextField.text!
         let studentNumber = studentNumberVC.studentNumberTextField.text!
         print(id, pw, name, studentNumber)
-        AF.request("\(api)/user/signup.do",
-                   method: .post,
-                   parameters: ["id": id,
-                                "pw": pw,
-                                "name": name,
-                                "studentNumber": studentNumber],
-                   encoding : JSONEncoding.default,
-                   headers: ["Content-Type": "application/json"]
-        )
-        .validate()
-        .responseData { response in
-            switch response.result {
-            case.success:
+//        AF.request("\(api)/user/signup.do",
+//                   method: .post,
+//                   parameters: ["id": id,
+//                                "pw": pw,
+//                                "name": name,
+//                                "studentNumber": studentNumber],
+//                   encoding : JSONEncoding.default,
+//                   headers: ["Content-Type": "application/json"]
+//        )
+//        .validate()
+//        .responseData { response in
+//            switch response.result {
+//            case.success:
                 self.dismiss(animated: true)
-            case.failure(let error):
-                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
-            }
-        }
+//            case.failure(let error):
+//                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
+//            }
+//        }
     }
 }

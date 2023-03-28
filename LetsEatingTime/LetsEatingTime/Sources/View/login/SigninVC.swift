@@ -56,13 +56,14 @@ class SigninVC: UIViewController {
     let eatingFoodImage = UIImageView().then {
         $0.image = UIImage(named: "EatingFoodImage")
     }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setup()
         
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 extension SigninVC {
