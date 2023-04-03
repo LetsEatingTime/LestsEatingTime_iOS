@@ -24,6 +24,7 @@
 		85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */; };
 		8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */; };
 		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; settings = {ATTRIBUTES = (Required, ); }; };
+		85892A6E29DB00D6000A465C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85892A6D29DB00D6000A465C /* BottomSheetViewController.swift */; };
 		85963EEA29D5D65A0068EC3E /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85963EE929D5D65A0068EC3E /* Signin.swift */; };
 		85BEC5A229D558F200B9948E /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BEC5A129D558F200B9948E /* BottomSheetView.swift */; };
 		85E292C929D32D260054E012 /* NFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E292C829D32D260054E012 /* NFC.swift */; };
@@ -48,6 +49,7 @@
 		85482A2429CC4B0D00F79893 /* SignupPWVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPWVC.swift; sourceTree = "<group>"; };
 		85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStudentNumberVC.swift; sourceTree = "<group>"; };
 		8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDCardVC.swift; sourceTree = "<group>"; };
+		85892A6D29DB00D6000A465C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		85963EE929D5D65A0068EC3E /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
 		85BEC5A129D558F200B9948E /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		85E292C829D32D260054E012 /* NFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFC.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */,
 				85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */,
 				85BEC5A129D558F200B9948E /* BottomSheetView.swift */,
+				85892A6D29DB00D6000A465C /* BottomSheetViewController.swift */,
 			);
 			path = Student;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				85BEC5A229D558F200B9948E /* BottomSheetView.swift in Sources */,
 				8541418E29C9A6C50063DF27 /* SceneDelegate.swift in Sources */,
 				85E292C929D32D260054E012 /* NFC.swift in Sources */,
+				85892A6E29DB00D6000A465C /* BottomSheetViewController.swift in Sources */,
 				85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */,
 				85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */,
 				8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */,
