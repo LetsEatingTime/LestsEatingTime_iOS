@@ -71,39 +71,48 @@ extension SigninVC {
         let id = idTextField.text!
         let pw = pwTextField.text!
         print(id, pw)
-        //        AF.request("\(api)/api/user/login.do",
-        //                   method: .post,
-        //                   parameters: [
-        //                    "email": id,
-        //                    "password": pw
-        //                   ],
-        //                   encoding : JSONEncoding.default,
-        //                   headers: [
-        //                    "Content-Type": "application/json"]
-        //        )
-        //        .validate()
-        //        .responseData { response in
-        //            switch response.result {
-        //            case.success:
-        let VC = StudentIDCardVC()
-        VC.modalPresentationStyle = .fullScreen
-        self.present(VC, animated: true, completion: nil)
-        //                guard let value = response.value else { return }
-        //                guard let result = try? JSONDecoder().decode(LoginDatas.self, from: value) else { return }
-        //                print("\(value)")
-        //                UserDefaults.standard.set(result.token, forKey: "accessToken")
-        //                let token = UserDefaults.standard.string(forKey: "accessToken")
-        //                print("Token: \(String(describing: token))")
-        //            case.failure(let error):
-        //                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
-        //            }
+        //        request(url: "\(api)/api/user/login.do",
+        //                         method: .post,
+        //                         params: [
+        //                            "id": id,
+        //                            "pw":pw
+        //                                 ],
+        //                         LoginData.self)
+        //        { (loginData: LoginData) in
+        //            print("받은 정보: \(loginData)")
         //        }
+//        AF.request("\(api)/api/user/login.do",
+//                   method: .post,
+//                   parameters: [
+//                    "email": id,
+//                    "password": pw
+//                   ],
+//                   encoding : JSONEncoding.default,
+//                   headers: [
+//                    "Content-Type": "application/json"]
+//        )
+//        .validate()
+//        .responseData { response in
+//            switch response.result {
+//            case.success:
+                self.present()
+//                guard let value = response.value else { return }
+//                guard let result = try? JSONDecoder().decode(LoginDatas.self, from: value) else { return }
+//                print("\(value)")
+//                UserDefaults.standard.set(result.token, forKey: "accessToken")
+//                let token = UserDefaults.standard.string(forKey: "accessToken")
+//                print("Token: \(String(describing: token))")
+//            case.failure(let error):
+//                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
+//            }
+//        }
     }
     @objc func didTabGoTosignupButton() {
         let VC = SignupVC()
         present(VC, animated: true)
     }
-    
+}
+extension SigninVC {
     func setup() {
         [
             eatingFoodImage,
@@ -150,4 +159,10 @@ extension SigninVC {
             $0.right.equalToSuperview().offset(20)
         }
     }
+    func present() {
+        let VC = StudentIDCardVC()
+        VC.modalPresentationStyle = .fullScreen
+        present(VC, animated: true)
+    }
+    
 }

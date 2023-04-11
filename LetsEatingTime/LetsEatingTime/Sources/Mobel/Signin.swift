@@ -7,3 +7,12 @@
 
 import Foundation
 
+struct LoginData: Decodable, Hashable {
+    let status: Int
+    let message: String
+    let data: LoginDatas
+}
+
+struct LoginDatas: Decodable, Hashable {
+    let token: String
+}
