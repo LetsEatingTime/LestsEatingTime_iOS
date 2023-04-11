@@ -44,19 +44,19 @@ class SignupStudentNumberVC: UIViewController {
             line
         ].forEach{ self.view.addSubview($0) }
         studentNumberLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
+            $0.top.equalToSuperview()
             $0.bottom.equalTo(studentNumberLabel.snp.top).offset(50)
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-150)
         }
         exampleStudentNumberLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(60)
+            $0.top.equalToSuperview().offset(10)
             $0.bottom.equalTo(studentNumberLabel.snp.top).offset(50)
             $0.left.equalTo(studentNumberLabel.snp.right).offset(0)
             $0.right.equalToSuperview().offset(0)
         }
         studentNumberTextField.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(130)
+            $0.top.equalToSuperview().offset(80)
             $0.bottom.equalTo(studentNumberTextField.snp.top).offset(30)
             $0.left.equalToSuperview().offset(70)
             $0.right.equalToSuperview().offset(-70)

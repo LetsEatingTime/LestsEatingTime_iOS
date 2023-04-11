@@ -38,13 +38,13 @@ class SignupNameVC: UIViewController {
             line
         ].forEach{ self.view.addSubview($0) }
         nameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
+            $0.top.equalToSuperview()
             $0.bottom.equalTo(nameLabel.snp.top).offset(50)
             $0.left.equalToSuperview().offset(30)
             $0.right.equalToSuperview().offset(-70)
         }
         nameTextField.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(130)
+            $0.top.equalToSuperview().offset(80)
             $0.bottom.equalTo(nameTextField.snp.top).offset(30)
             $0.left.equalToSuperview().offset(70)
             $0.right.equalToSuperview().offset(-70)

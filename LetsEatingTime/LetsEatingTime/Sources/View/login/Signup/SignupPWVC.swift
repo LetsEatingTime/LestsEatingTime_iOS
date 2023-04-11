@@ -50,13 +50,13 @@ class SignupPWVC: UIViewController {
             line2
         ].forEach{ self.view.addSubview($0) }
         pwLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
+            $0.top.equalToSuperview().offset(0)
             $0.bottom.equalTo(pwLabel.snp.top).offset(50)
             $0.left.equalToSuperview().offset(30)
-            $0.right.equalToSuperview().offset(-70)
+            $0.right.equalToSuperview().offset(-30)
         }
         pwTextField.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(130)
+            $0.top.equalToSuperview().offset(80)
             $0.bottom.equalTo(pwTextField.snp.top).offset(30)
             $0.left.equalToSuperview().offset(70)
             $0.right.equalToSuperview().offset(-70)
