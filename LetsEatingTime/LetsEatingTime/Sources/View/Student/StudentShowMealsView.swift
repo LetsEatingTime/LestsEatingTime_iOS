@@ -8,153 +8,170 @@
 import UIKit
 import SnapKit
 import Then
+import Alamofire
 
-final class BottomSheetView: PassThroughView {
-    // MARK: Constants
-    enum Mode {
-        case tip
-        case full
+class StudentShowMealsVC: UIViewController {
+    let dateLabel = UILabel().then {
+        $0.text = "2023년 04월 06일"
     }
-    private enum Const {
-        static let duration = 0.5
-        static let cornerRadius = 12.0
-        static let barViewTopSpacing = 5.0
-        static let barViewSize = CGSize(width: UIScreen.main.bounds.width * 0.2, height: 5.0)
-        static let bottomSheetRatio: (Mode) -> Double = { mode in
-            switch mode {
-            case .tip:
-                return 0.90 // 위에서 부터의 값 (밑으로 갈수록 값이 커짐)
-            case .full:
-                return 0.1
-            }
-        }
-        static let bottomSheetYPosition: (Mode) -> Double = { mode in
-            Self.bottomSheetRatio(mode) * UIScreen.main.bounds.height
-        }
+    let breakfast = UIView().then {
+        $0.layer.cornerRadius = 20
+        $0.backgroundColor = .systemRed
     }
-    
-    // MARK: UI
-    let bottomSheetView: UIView = {
-        let view = UIView().then {
-            $0.backgroundColor = .white
-            $0.layer.cornerRadius = 20
-        }
-        return view
-    }()
-    let backgroundView: UIView = {
-        let view = UIView().then {
-            $0.backgroundColor = .lightGray
-        }
-        return view
-    }()
-    private let barView: UIView = {
-        let view = UIView().then {
-            $0.backgroundColor = .white
-            $0.isUserInteractionEnabled = false
-            $0.layer.cornerRadius = 2
-        }
-        return view
-    }()
-    
-    // MARK: Properties
-    var mode: Mode = .tip {
-        didSet {
-            switch self.mode {
-            case .tip:
-                break
-            case .full:
-                break
-            }
-            self.updateConstraint(offset: Const.bottomSheetYPosition(self.mode))
-        }
+    let breakfastImage = UIImageView().then {
+        $0.image = UIImage(named: "")
+        $0.backgroundColor = .blue
     }
-    var bottomSheetColor: UIColor? {
-        didSet { self.bottomSheetView.backgroundColor = .white }
+    let breakfastLabel = UILabel().then {
+        $0.text = "아침급식이 없습니다 아침급식이 없습니다 아침급식이 없습니다 아침급식이 없습니다"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.numberOfLines = 0
     }
-    var barViewColor: UIColor? {
-        didSet { self.barView.backgroundColor = self.barViewColor }
+
+    let lunch = UIView().then {
+        $0.layer.cornerRadius = 20
+        $0.backgroundColor = .systemRed
     }
-    
-    // MARK: Initializer
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init() has not been implemented")
+    let lunchImage = UIImageView().then {
+        $0.image = UIImage(named: "")
+        $0.backgroundColor = .blue
     }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.backgroundColor = .clear
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan))
-        self.addGestureRecognizer(panGesture)
-        
-        self.backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
-        
-        self.bottomSheetView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        self.bottomSheetView.layer.cornerRadius = Const.cornerRadius
-        self.bottomSheetView.clipsToBounds = true
-        
-        
-        self.bottomSheetView.layer.cornerRadius = Const.cornerRadius
-        self.bottomSheetView.clipsToBounds = true
-        
-        self.addSubview(self.bottomSheetView)
-        self.bottomSheetView.addSubview(self.backgroundView)
-        self.backgroundView.addSubview(self.barView)
-        
-        self.bottomSheetView.snp.makeConstraints {
-            $0.left.right.bottom.equalToSuperview()
-            $0.top.equalTo(Const.bottomSheetYPosition(.tip))
-        }
-        self.barView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(Const.barViewTopSpacing)
-            $0.size.equalTo(Const.barViewSize)
-        }
-        self.backgroundView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(Const.barViewTopSpacing).offset(-1)
-            $0.left.right.equalToSuperview()
-            $0.bottom.equalTo(backgroundView.snp.top).offset(25)
-        }
+    let lunchLabel = UILabel().then {
+        $0.text = "점심급식이 없습니다 점심급식이 없습니다 점심급식이 없습니다 점심급식이 없습니다"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.numberOfLines = 0
     }
-    
-    // MARK: Methods
-    @objc private func didPan(_ recognizer: UIPanGestureRecognizer) {
-        let translationY = recognizer.translation(in: self).y
-        let minY = self.bottomSheetView.frame.minY
-        let offset = translationY + minY
-        
-        if Const.bottomSheetYPosition(.full)...Const.bottomSheetYPosition(.tip) ~= offset {
-            self.updateConstraint(offset: offset)
-            recognizer.setTranslation(.zero, in: self)
-        }
-        UIView.animate(
-            withDuration: 0.5,
-            delay: 0,
-            options: .curveEaseOut,
-            animations: self.layoutIfNeeded,
-            completion: nil
-        )
-        
-        guard recognizer.state == .ended else { return }
-        UIView.animate(
-            withDuration: Const.duration,
-            delay: 0,
-            options: .allowUserInteraction,
-            animations: {
-                // velocity를 이용하여 위로 스와이프인지, 아래로 스와이프인지 확인
-                self.mode = recognizer.velocity(in: self).y >= 0 ? Mode.tip : .full
-            },
-            completion: nil
-        )
+
+    let dinner = UIView().then {
+        $0.layer.cornerRadius = 20
+        $0.backgroundColor = .systemRed
     }
-    
-    private func updateConstraint(offset: Double) {
-        self.bottomSheetView.snp.remakeConstraints {
-            $0.top.equalToSuperview().inset(offset)
-            $0.left.right.bottom.equalToSuperview()
-        }
+    let dinnerImage = UIImageView().then {
+        $0.image = UIImage(named: "")
+        $0.backgroundColor = .blue
     }
+    let dinnerLabel = UILabel().then {
+        $0.text = "저녁급식이 없습니다 저녁급식이 없습니다 저녁급식이 없습니다 저녁급식이 없습니다"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+        $0.numberOfLines = 0
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setup()
+
+    }
+
+
 }
 
+extension StudentShowMealsVC {
+    func setup() {
+        [
+            breakfast,
+            lunch,
+            dinner,
+            breakfastImage,
+            lunchImage,
+            dinnerImage,
+            breakfastLabel,
+            lunchLabel,
+            dinnerLabel
+        ].forEach{self.view.addSubview($0)}
+        breakfast.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(40)
+            $0.left.equalToSuperview().offset(40)
+            $0.right.equalToSuperview().offset(-40)
+            $0.bottom.equalTo(breakfast.snp.top).offset(140)
+        }
+        breakfastImage.snp.makeConstraints {
+            $0.top.equalTo(breakfast.snp.top).offset(30)
+            $0.left.equalTo(breakfast.snp.left).offset(20)
+            $0.right.equalTo(breakfastImage.snp.left).offset(80)
+            $0.bottom.equalTo(breakfast.snp.bottom).offset(-30)
+        }
+        breakfastLabel.snp.makeConstraints {
+            $0.top.equalTo(breakfast.snp.top).offset(50)
+            $0.left.equalTo(breakfastImage.snp.right).offset(20)
+            $0.right.equalTo(breakfastLabel.snp.left).offset(180)
+            $0.bottom.equalTo(breakfast.snp.bottom).offset(-50)
+        }
+        lunch.snp.makeConstraints {
+            $0.top.equalTo(breakfast.snp.bottom).offset(40)
+            $0.left.equalToSuperview().offset(40)
+            $0.right.equalToSuperview().offset(-40)
+            $0.bottom.equalTo(lunch.snp.top).offset(140)
+        }
+        lunchImage.snp.makeConstraints {
+            $0.top.equalTo(lunch.snp.top).offset(30)
+            $0.left.equalTo(lunch.snp.left).offset(20)
+            $0.right.equalTo(lunchImage.snp.left).offset(80)
+            $0.bottom.equalTo(lunch.snp.bottom).offset(-30)
+        }
+        lunchLabel.snp.makeConstraints {
+            $0.top.equalTo(lunch.snp.top).offset(50)
+            $0.left.equalTo(lunchImage.snp.right).offset(20)
+            $0.right.equalTo(lunchLabel.snp.left).offset(180)
+            $0.bottom.equalTo(lunch.snp.bottom).offset(-50)
+        }
+        dinner.snp.makeConstraints {
+            $0.top.equalTo(lunch.snp.bottom).offset(40)
+            $0.left.equalToSuperview().offset(40)
+            $0.right.equalToSuperview().offset(-40)
+            $0.bottom.equalTo(dinner.snp.top).offset(140)
+        }
+        dinnerImage.snp.makeConstraints {
+            $0.top.equalTo(dinner.snp.top).offset(30)
+            $0.left.equalTo(dinner.snp.left).offset(20)
+            $0.right.equalTo(dinnerImage.snp.left).offset(80)
+            $0.bottom.equalTo(dinner.snp.bottom).offset(-30)
+        }
+        dinnerLabel.snp.makeConstraints {
+            $0.top.equalTo(dinner.snp.top).offset(50)
+            $0.left.equalTo(dinnerImage.snp.right).offset(20)
+            $0.right.equalTo(dinnerLabel.snp.left).offset(180)
+            $0.bottom.equalTo(dinner.snp.bottom).offset(-50)
+        }
+    }
+    
+    func getMeals() {
+        
+    }
+    //    func request<T: Decodable>( url: String,
+    //                                           method: HTTPMethod,
+    //                                           params: [String: Any]? = nil,
+    //                                           _ model: T.Type,
+    //                                           completion: @escaping (T) -> Void) {
+    //            print("함수 호출")
+    //            AF.request(url,
+    //                       method: method,
+    //                       parameters: params,
+    //                       encoding: method == .get ? URLEncoding.default : JSONEncoding.default,
+    //                       interceptor: Interceptor()
+    //            )
+    //            .responseData { response in
+    //                switch response.result {
+    //                case .success:
+    //                    self.present()
+    //                    print("성공")
+    //                    if let data = response.data {
+    //                        let decoder = JSONDecoder()
+    //                        let dateFormatter = DateFormatter()
+    //                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+    //                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+    //                        print(String(decoding: response.data!, as: UTF8.self))
+    //                        if let decodedData = try? decoder.decode(T.self, from: data) {
+    //                            DispatchQueue.main.async {
+    //                                completion(decodedData)
+    //                            }
+    //                        }
+    //                    }
+    //                case .failure(let error):
+    //                    print(error)
+    //                }
+    //            }
+    //        }
+    //    }
+}
 

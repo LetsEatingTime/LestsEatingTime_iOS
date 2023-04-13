@@ -27,9 +27,9 @@
 		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; settings = {ATTRIBUTES = (Required, ); }; };
 		85963EEA29D5D65A0068EC3E /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85963EE929D5D65A0068EC3E /* Signin.swift */; };
 		85BEC5A229D558F200B9948E /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BEC5A129D558F200B9948E /* BottomSheetView.swift */; };
-		85E292C929D32D260054E012 /* NFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E292C829D32D260054E012 /* NFC.swift */; };
 		85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */; };
 		85EB818929E2FE08004F4780 /* EditStudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB818829E2FE08004F4780 /* EditStudentIDCardVC.swift */; };
+		85EB818B29E51BF3004F4780 /* NFC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB818A29E51BF3004F4780 /* NFC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,9 +53,9 @@
 		8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDCardVC.swift; sourceTree = "<group>"; };
 		85963EE929D5D65A0068EC3E /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
 		85BEC5A129D558F200B9948E /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
-		85E292C829D32D260054E012 /* NFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFC.swift; sourceTree = "<group>"; };
 		85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentShowMealsView.swift; sourceTree = "<group>"; };
 		85EB818829E2FE08004F4780 /* EditStudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStudentIDCardVC.swift; sourceTree = "<group>"; };
+		85EB818A29E51BF3004F4780 /* NFC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NFC.swift; path = ../View/Student/NFC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,7 +182,7 @@
 		85E292CE29D3D3520054E012 /* Mobel */ = {
 			isa = PBXGroup;
 			children = (
-				85E292C829D32D260054E012 /* NFC.swift */,
+				85EB818A29E51BF3004F4780 /* NFC.swift */,
 				85963EE929D5D65A0068EC3E /* Signin.swift */,
 				850960E829DE9F6000B16E87 /* GetMealsAPI.swift */,
 			);
@@ -275,13 +275,13 @@
 				85482A2129CC4AA700F79893 /* SignupNameVC.swift in Sources */,
 				85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */,
 				854141B029C9AEA00063DF27 /* DataBase.xcdatamodeld in Sources */,
+				85EB818B29E51BF3004F4780 /* NFC.swift in Sources */,
 				85482A2329CC4AFD00F79893 /* SignupIDVC.swift in Sources */,
 				854141A929C9AC4B0063DF27 /* Color.swift in Sources */,
 				8541418C29C9A6C50063DF27 /* AppDelegate.swift in Sources */,
 				850960E929DE9F6000B16E87 /* GetMealsAPI.swift in Sources */,
 				85BEC5A229D558F200B9948E /* BottomSheetView.swift in Sources */,
 				8541418E29C9A6C50063DF27 /* SceneDelegate.swift in Sources */,
-				85E292C929D32D260054E012 /* NFC.swift in Sources */,
 				85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */,
 				85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */,
 				85EB818929E2FE08004F4780 /* EditStudentIDCardVC.swift in Sources */,
