@@ -45,13 +45,13 @@ class SigninVC: UIViewController {
         $0.backgroundColor = .mainColor
         $0.setTitle("로그인", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(TabsigninBt), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didPressSigninBt), for: .touchUpInside)
     }
     let signupButton = UIButton().then {
         $0.backgroundColor = .mainColor
         $0.setTitle("회원가입", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(didTabGoTosignupButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didPressGoTosignupButton), for: .touchUpInside)
     }
     let eatingFoodImage = UIImageView().then {
         $0.image = UIImage(named: "EatingFoodImage")
@@ -67,7 +67,8 @@ class SigninVC: UIViewController {
     }
 }
 extension SigninVC {
-    @objc func TabsigninBt() {
+    @objc func 
+            didPressSigninBt() {
         let id = idTextField.text!
         let pw = pwTextField.text!
         print(id, pw)
@@ -107,7 +108,7 @@ extension SigninVC {
 //            }
 //        }
     }
-    @objc func didTabGoTosignupButton() {
+    @objc func didPressGoTosignupButton() {
         let VC = SignupVC()
         present(VC, animated: true)
     }

@@ -29,13 +29,13 @@ class SignupVC: UIViewController {
         $0.backgroundColor = .mainColor
         $0.setTitle("다음-->", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(didTabsignupNextButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didPressSignupNextButton), for: .touchUpInside)
     }
     let backButton = UIButton().then {
         $0.backgroundColor = .gray
         $0.setTitle("<--돌아가기", for: .normal)
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(didTabbackButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didPressBackButton), for: .touchUpInside)
     }
     let eatingFoodImage = UIImageView().then {
         $0.image = UIImage(named: "EatingFoodImage")
@@ -72,7 +72,7 @@ class SignupVC: UIViewController {
     }
 }
 extension SignupVC {
-    @objc func didTabbackButton() {
+    @objc func didPressBackButton() {
         switch children.first {
         case idVC:
             self.dismiss(animated: true)
@@ -104,7 +104,7 @@ extension SignupVC {
             print("예기치못한 오류ㅠㅠ")
         }    }
     
-    @objc func didTabsignupNextButton() {
+    @objc func didPressSignupNextButton() {
 
 //        print("Generated UUID: \(uniqueID)")
         switch children.first {
