@@ -18,7 +18,7 @@ class SignupVC: UIViewController {
         $0.textAlignment = .center
     }
     let uiView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .clear
     }
     let progressView = UIProgressView().then {
         $0.progress = 0.25
@@ -63,16 +63,13 @@ class SignupVC: UIViewController {
         setup()
         configureUIView()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        configureUIView()
-    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
 }
 extension SignupVC {
     @objc func didPressBackButton() {
+        print("didPressBackButton")
         switch children.first {
         case idVC:
             self.dismiss(animated: true)
@@ -102,11 +99,11 @@ extension SignupVC {
             }
         default:
             print("예기치못한 오류ㅠㅠ")
-        }    }
+        }
+    }
     
     @objc func didPressSignupNextButton() {
-
-//        print("Generated UUID: \(uniqueID)")
+        print("didPressSignupNextButton")
         switch children.first {
         case idVC:
             addChild(pwVC)
@@ -133,11 +130,8 @@ extension SignupVC {
                 self.progressView.setProgress(1, animated: true)
             }
         case studentNumberVC:
-            sendInfomationToServer()
+            organizeInfomation()
         default:
-//            let alertController = UIAlertController() {
-//
-//            }
             print("예기치못한 오류ㅠㅠ")
         }
     }
@@ -145,11 +139,6 @@ extension SignupVC {
     func configureUIView() {
         addChild(idVC)
         self.uiView.addSubview(myIDView)
-
-        // Generate a UUID (Universally Unique Identifier)
-        let uniqueID = UUID().uuidString
-
-        print("Generated UUID: \(uniqueID)")
     }
     func setup() {
         [
@@ -199,29 +188,94 @@ extension SignupVC {
     }
 }
 extension SignupVC {
-    func sendInfomationToServer() {
+    
+    func gradeStringToInt(from originalString: String) -> Int? {
+        if originalString.count >= 1 {
+            let gradeIndex = originalString.index(originalString.startIndex, offsetBy: 0)
+            let substring = originalString[gradeIndex]
+            return Int(String(substring))
+        }else {
+            print("nil")
+            return 00
+        }
+    }
+    
+    func classNameStringToInt(from originalString: String) -> Int? {
+        if originalString.count >= 2 {
+            let string = originalString.index(originalString.startIndex, offsetBy: 1)
+            let substring = originalString[string]
+            return Int(String(substring))
+        }else {
+            print("nil")
+            return 00
+        }
+        
+    }
+    func classNoStringToInt(from originalString: String) -> Int? {
+        if originalString.count >= 4 {
+            let start = originalString.index(originalString.startIndex, offsetBy: 2)
+            let end = originalString.index(originalString.startIndex, offsetBy: 3)
+            let substring = originalString[start...end]
+            return Int(substring)
+        }else {
+            print("nil")
+            return 00
+        }
+    }
+    
+    func organizeInfomation() {
         let id = idVC.idTextField.text!
         let pw = pwVC.pwTextField.text!
         let name = nameVC.nameTextField.text!
         let studentNumber = studentNumberVC.studentNumberTextField.text!
-        print(id, pw, name, studentNumber)
-        //        AF.request("\(api)/user/signup.do",
-        //                   method: .post,
-        //                   parameters: ["id": id,
-        //                                "pw": pw,
-        //                                "name": name,
-        //                                "studentNumber": studentNumber],
-        //                   encoding : JSONEncoding.default,
-        //                   headers: ["Content-Type": "application/json"]
-        //        )
-        //        .validate()
-        //        .responseData { response in
-        //            switch response.result {
-        //            case.success:
-        self.dismiss(animated: true)
-        //            case.failure(let error):
-        //                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
-        //            }
-        //        }
+        if id == "" || pw == "" || name == "" || studentNumber.count != 4 {
+            let alertController = UIAlertController(title: "경고⚠️", message: "입력한 정보를 확인해주세요!", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        } else {
+            contactToServer()
+        }
     }
+    func contactToServer() {
+        let id = idVC.idTextField.text!
+        let pw = pwVC.pwTextField.text!
+        let name = nameVC.nameTextField.text!
+        let studentNumber = studentNumberVC.studentNumberTextField.text!
+        
+        let grade = gradeStringToInt(from: studentNumber)!
+        
+        let className = classNameStringToInt(from: studentNumber)!
+        
+        let classNo = classNoStringToInt(from: studentNumber)!
+        
+        let sessionManager: Session = {
+                let serverTrustPolices = ServerTrustManager(evaluators: [api: DisabledTrustEvaluator()])
+                let configuration = URLSessionConfiguration.af.default
+                configuration.timeoutIntervalForRequest = 100111
+                return Session(configuration: configuration, serverTrustManager: serverTrustPolices)
+            }()
+        
+        sessionManager.request("\(api)/api/account/signup.do",
+                               method: .post,
+                               parameters: ["id": id,
+                                            "pw": pw,
+                                            "name": name,
+                                            "grade": grade,
+                                            "className": className,
+                                            "classNo": classNo],
+                               encoding : JSONEncoding.default,
+                               headers: ["Content-Type": "application/json"]
+        )
+        .validate()
+        .responseData { response in
+            switch response.result {
+            case.success:
+                self.dismiss(animated: true)
+            case.failure(let error):
+                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
+            }
+        }
+    }
+    
 }
