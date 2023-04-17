@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SignupIDVC: UIViewController {
+class SignupIDVC: UIViewController, UITextFieldDelegate {
     let idLabel = UILabel().then {
         $0.text = "아이디"
         $0.font = .systemFont(ofSize: 30, weight: .bold)
@@ -28,6 +28,7 @@ class SignupIDVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        idTextField.delegate = self
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -57,4 +58,16 @@ class SignupIDVC: UIViewController {
             $0.right.equalToSuperview().offset(-463)
         }
     }
+}
+extension SignupIDVC {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch (textField.text, textField.text!.count, range.length, range.location) {
+        case let (text, count, 0, location) where count >= 4 && location < 4:
+            line.backgroundColor = .red
+            idTextField.textColor = .red
+            return false
+        default:
+            return true
+        }
+        }
 }

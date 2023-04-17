@@ -67,48 +67,40 @@ class SigninVC: UIViewController {
     }
 }
 extension SigninVC {
-    @objc func 
-            didPressSigninBt() {
+    @objc func didPressSigninBt() {
         let id = idTextField.text!
         let pw = pwTextField.text!
-        print(id, pw)
-        //        request(url: "\(api)/api/user/login.do",
-        //                         method: .post,
-        //                         params: [
-        //                            "id": id,
-        //                            "pw":pw
-        //                                 ],
-        //                         LoginData.self)
-        //        { (loginData: LoginData) in
-        //            print("받은 정보: \(loginData)")
-        //        }
-//        AF.request("\(api)/api/user/login.do",
-//                   method: .post,
-//                   parameters: [
-//                    "email": id,
-//                    "password": pw
-//                   ],
-//                   encoding : JSONEncoding.default,
-//                   headers: [
-//                    "Content-Type": "application/json"]
-//        )
-//        .validate()
-//        .responseData { response in
-//            switch response.result {
-//            case.success:
+        print("\(id), \(pw)")
+        AF.request("\(api)/api/account/login.do",
+                   method: .post,
+                   parameters: [
+                    "id": id,
+                    "password": pw
+                   ],
+                   encoding : JSONEncoding.default,
+                   headers: ["Content-Type": "application/json"]
+        )
+        .validate()
+        .responseData { response in
+            switch response.result {
+            case.success:
                 self.present()
-//                guard let value = response.value else { return }
-//                guard let result = try? JSONDecoder().decode(LoginDatas.self, from: value) else { return }
-//                print("\(value)")
-//                UserDefaults.standard.set(result.token, forKey: "accessToken")
-//                let token = UserDefaults.standard.string(forKey: "accessToken")
-//                print("Token: \(String(describing: token))")
-//            case.failure(let error):
-//                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
-//            }
-//        }
+                guard let value = response.value else { return }
+                guard let result = try? JSONDecoder().decode(LoginDatas.self, from: value) else { return }
+                print("\(value)")
+                UserDefaults.standard.set(result.grantType, forKey: "grantType")
+                UserDefaults.standard.set(result.accessToken, forKey: "accessToken")
+                UserDefaults.standard.set(result.refreshToken, forKey: "refreshToken")
+                print("trantType: \(String(describing: result.grantType))")
+                print("accessToken: \(String(describing: result.accessToken))")
+                print("refreshToken: \(String(describing: result.refreshToken))")
+            case.failure(let error):
+                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
+            }
+        }
     }
     @objc func didPressGoTosignupButton() {
+        print("asdf")
         let VC = SignupVC()
         present(VC, animated: true)
     }
@@ -121,8 +113,8 @@ extension SigninVC {
             idTextField,
             pwTextField,
             pwTextField,
-            signinButton,
-            signupButton
+            signupButton,
+            signinButton
         ].forEach{ self.view.addSubview($0) }
         logoImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(200)

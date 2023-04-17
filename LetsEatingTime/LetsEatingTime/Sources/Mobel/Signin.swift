@@ -14,5 +14,7 @@ struct LoginData: Decodable, Hashable {
 }
 
 struct LoginDatas: Decodable, Hashable {
-    let token: String
+        let grantType : String
+        let accessToken: String
+        let refreshToken: String
 }

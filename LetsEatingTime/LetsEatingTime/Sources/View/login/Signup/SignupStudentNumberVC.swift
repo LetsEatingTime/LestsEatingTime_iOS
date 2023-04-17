@@ -11,7 +11,7 @@ import SnapKit
 
 class SignupStudentNumberVC: UIViewController {
     let studentNumberLabel = UILabel().then {
-        $0.text = "학번을 입력해주세요."
+        $0.text = "학번"
         $0.font = .systemFont(ofSize:25.0, weight: .bold)
     }
     let exampleStudentNumberLabel = UILabel().then {
@@ -47,7 +47,7 @@ class SignupStudentNumberVC: UIViewController {
             $0.top.equalToSuperview()
             $0.bottom.equalTo(studentNumberLabel.snp.top).offset(50)
             $0.left.equalToSuperview().offset(30)
-            $0.right.equalToSuperview().offset(-150)
+            $0.right.equalTo(studentNumberLabel.snp.left).offset(50)
         }
         exampleStudentNumberLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
