@@ -13,13 +13,18 @@ import Alamofire
 class StudentShowMealsVC: UIViewController {
     let dateLabel = UILabel().then {
         $0.text = "2023년 04월 06일"
+        
+        $0.layer.cornerRadius = 20
+        $0.backgroundColor = .systemRed
+        
     }
+    
     let breakfast = UIView().then {
         $0.layer.cornerRadius = 20
         $0.backgroundColor = .systemRed
     }
     let breakfastImage = UIImageView().then {
-        $0.image = UIImage(named: "")
+        $0.image = UIImage(named: "StudentIDCard")
         $0.backgroundColor = .blue
     }
     let breakfastLabel = UILabel().then {
@@ -27,7 +32,7 @@ class StudentShowMealsVC: UIViewController {
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.numberOfLines = 0
     }
-
+    
     let lunch = UIView().then {
         $0.layer.cornerRadius = 20
         $0.backgroundColor = .systemRed
@@ -41,7 +46,7 @@ class StudentShowMealsVC: UIViewController {
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.numberOfLines = 0
     }
-
+    
     let dinner = UIView().then {
         $0.layer.cornerRadius = 20
         $0.backgroundColor = .systemRed
@@ -55,15 +60,59 @@ class StudentShowMealsVC: UIViewController {
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.numberOfLines = 0
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setup()
-
+        getMeals()
+        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    
+}
 
-
+extension StudentShowMealsVC {
+    func getMeals() {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        
+        let year = calendar.component(.year, from: currentDate)
+        let month = calendar.component(.month, from: currentDate)
+        let day = calendar.component(.day, from: currentDate)
+        let url = "https://dodam.b1nd.com/api/meal?year=\(year)&month=\(month)&day=\(day)"
+        
+        AF.request(url, method: .get).responseDecodable(of: MealsData.self) { response in
+            // 응답 결과 처리
+            switch response.result {
+            case .success(let value):
+                if value.breakfast != nil {
+                    self.breakfastLabel.text = value.breakfast
+                } else {
+                    self.breakfastLabel.text = "아침이 없습니다"
+                }
+                if value.breakfast != nil {
+                    self.lunchLabel.text = value.lunch
+                } else {
+                    self.lunchLabel.text = "점심이 없습니다"
+                }
+                if value.breakfast != nil {
+                    self.dinnerLabel.text = value.dinner
+                } else {
+                    self.dinnerLabel.text = "저녁이 없습니다"
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                let alertController = UIAlertController(title: "경고⚠️", message: "급식 정보를 가져오지 못했습니다🥲", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
 }
 
 extension StudentShowMealsVC {
@@ -94,7 +143,7 @@ extension StudentShowMealsVC {
         breakfastLabel.snp.makeConstraints {
             $0.top.equalTo(breakfast.snp.top).offset(50)
             $0.left.equalTo(breakfastImage.snp.right).offset(20)
-            $0.right.equalTo(breakfastLabel.snp.left).offset(180)
+            $0.right.equalTo(breakfastLabel.snp.left).offset(160)
             $0.bottom.equalTo(breakfast.snp.bottom).offset(-50)
         }
         lunch.snp.makeConstraints {
@@ -112,7 +161,7 @@ extension StudentShowMealsVC {
         lunchLabel.snp.makeConstraints {
             $0.top.equalTo(lunch.snp.top).offset(50)
             $0.left.equalTo(lunchImage.snp.right).offset(20)
-            $0.right.equalTo(lunchLabel.snp.left).offset(180)
+            $0.right.equalTo(lunchLabel.snp.left).offset(160)
             $0.bottom.equalTo(lunch.snp.bottom).offset(-50)
         }
         dinner.snp.makeConstraints {
@@ -130,48 +179,8 @@ extension StudentShowMealsVC {
         dinnerLabel.snp.makeConstraints {
             $0.top.equalTo(dinner.snp.top).offset(50)
             $0.left.equalTo(dinnerImage.snp.right).offset(20)
-            $0.right.equalTo(dinnerLabel.snp.left).offset(180)
+            $0.right.equalTo(dinnerLabel.snp.left).offset(160)
             $0.bottom.equalTo(dinner.snp.bottom).offset(-50)
         }
     }
-    
-    func getMeals() {
-        
-    }
-    //    func request<T: Decodable>( url: String,
-    //                                           method: HTTPMethod,
-    //                                           params: [String: Any]? = nil,
-    //                                           _ model: T.Type,
-    //                                           completion: @escaping (T) -> Void) {
-    //            print("함수 호출")
-    //            AF.request(url,
-    //                       method: method,
-    //                       parameters: params,
-    //                       encoding: method == .get ? URLEncoding.default : JSONEncoding.default,
-    //                       interceptor: Interceptor()
-    //            )
-    //            .responseData { response in
-    //                switch response.result {
-    //                case .success:
-    //                    self.present()
-    //                    print("성공")
-    //                    if let data = response.data {
-    //                        let decoder = JSONDecoder()
-    //                        let dateFormatter = DateFormatter()
-    //                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
-    //                        decoder.dateDecodingStrategy = .formatted(dateFormatter)
-    //                        print(String(decoding: response.data!, as: UTF8.self))
-    //                        if let decodedData = try? decoder.decode(T.self, from: data) {
-    //                            DispatchQueue.main.async {
-    //                                completion(decodedData)
-    //                            }
-    //                        }
-    //                    }
-    //                case .failure(let error):
-    //                    print(error)
-    //                }
-    //            }
-    //        }
-    //    }
 }
-

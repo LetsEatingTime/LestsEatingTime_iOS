@@ -9,8 +9,12 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
+import JWTDecode
+import SwiftKeychainWrapper
 
 class SigninVC: UIViewController {
+    
+//    let tokens = Token()
     
     let logoImage = UILabel().then {
         //        $0.image = (UIImage(named: ""))
@@ -56,6 +60,14 @@ class SigninVC: UIViewController {
     let eatingFoodImage = UIImageView().then {
         $0.image = UIImage(named: "EatingFoodImage")
     }
+    
+    let checkedImage = UIImage(systemName: "checkmark.square.fill")
+    let uncheckedImage = UIImage(systemName: "square")
+    
+    lazy var refreshCheckBoxButton = UIButton(type: .system).then {
+        $0.setImage(uncheckedImage, for: .normal)
+        $0.addTarget(self, action: #selector(checkBoxTapped(_:)), for: .touchUpInside)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -67,9 +79,18 @@ class SigninVC: UIViewController {
     }
 }
 extension SigninVC {
+    @objc func checkBoxTapped(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            sender.setImage(checkedImage, for: .normal)
+        } else {
+            sender.setImage(uncheckedImage, for: .normal)
+        }
+    }
     @objc func didPressSigninBt() {
         let id = idTextField.text!
         let pw = pwTextField.text!
+        
         print("\(id), \(pw)")
         AF.request("\(api)/api/account/login.do",
                    method: .post,
@@ -83,27 +104,31 @@ extension SigninVC {
         .validate()
         .responseData { response in
             switch response.result {
-            case.success:
-                self.present()
-                guard let value = response.value else { return }
-                guard let result = try? JSONDecoder().decode(LoginDatas.self, from: value) else { return }
-                print("\(value)")
-                UserDefaults.standard.set(result.grantType, forKey: "grantType")
-                UserDefaults.standard.set(result.accessToken, forKey: "accessToken")
-                UserDefaults.standard.set(result.refreshToken, forKey: "refreshToken")
-                print("trantType: \(String(describing: result.grantType))")
-                print("accessToken: \(String(describing: result.accessToken))")
-                print("refreshToken: \(String(describing: result.refreshToken))")
+            case.success(let value):
+                do {
+                    self.present()
+                    Token.setKeychain(Token.TokenType.grantType.rawValue, forKey: .grantType)
+                    Token.setKeychain(Token.TokenType.accessToken.rawValue, forKey: .accessToken)
+                    Token.setKeychain(Token.TokenType.refreshToken.rawValue, forKey: .refreshToken)
+                } catch {
+                    print("Failed to decode token: \(error.localizedDescription)")
+                    let alertController = UIAlertController(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요.\(error.localizedDescription)", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
             case.failure(let error):
-                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
+                let alertController = UIAlertController(title: "경고⚠️", message: "입력한 정보를 확인해주세요!\(error)", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
-    @objc func didPressGoTosignupButton() {
-        print("asdf")
-        let VC = SignupVC()
-        present(VC, animated: true)
-    }
+@objc func didPressGoTosignupButton() {
+    let VC = SignupVC()
+    present(VC, animated: true)
+}
 }
 extension SigninVC {
     func setup() {
@@ -112,9 +137,9 @@ extension SigninVC {
             logoImage,
             idTextField,
             pwTextField,
-            pwTextField,
             signupButton,
-            signinButton
+            signinButton,
+            refreshCheckBoxButton
         ].forEach{ self.view.addSubview($0) }
         logoImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(200)
@@ -151,11 +176,16 @@ extension SigninVC {
             $0.left.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(20)
         }
+        //        refreshCheckBoxButton.snp.makeConstraints {
+        //            $0.top.equalTo(eatingFoodImage.snp.bottom).offset(-367)
+        //            $0.bottom.equalToSuperview().offset(47)
+        //            $0.left.equalToSuperview().offset(0)
+        //            $0.right.equalToSuperview().offset(20)
+        //        }
     }
     func present() {
         let VC = StudentIDCardVC()
         VC.modalPresentationStyle = .fullScreen
         present(VC, animated: true)
     }
-    
 }
