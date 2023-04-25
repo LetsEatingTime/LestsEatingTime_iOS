@@ -23,12 +23,17 @@
 		85482A2329CC4AFD00F79893 /* SignupIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2229CC4AFD00F79893 /* SignupIDVC.swift */; };
 		85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2429CC4B0D00F79893 /* SignupPWVC.swift */; };
 		85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */; };
+		8568F8B829F645CB000E6981 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8568F8B729F645CB000E6981 /* JWTDecode */; };
 		8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */; };
 		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; settings = {ATTRIBUTES = (Required, ); }; };
+		858A5B4529EE675D009ACE57 /* SignupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858A5B4429EE675D009ACE57 /* SignupData.swift */; };
 		85963EEA29D5D65A0068EC3E /* Signin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85963EE929D5D65A0068EC3E /* Signin.swift */; };
 		85BEC5A229D558F200B9948E /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BEC5A129D558F200B9948E /* BottomSheetView.swift */; };
 		85CB7E4A29E7F0B60078F2AB /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CB7E4929E7F0B60078F2AB /* Token.swift */; };
-		85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */; };
+		85DA8DC229F7A1A5008D9BC7 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 85DA8DC129F7A1A5008D9BC7 /* SwiftKeychainWrapper */; };
+		85E292D029D3D45B0054E012 /* StudentShowMealsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E292CF29D3D45B0054E012 /* StudentShowMealsVC.swift */; };
+		85E3B93329F48FE000B2D2F3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 85E3B93229F48FE000B2D2F3 /* Realm */; };
+		85E3B93529F48FE000B2D2F3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 85E3B93429F48FE000B2D2F3 /* RealmSwift */; };
 		85EB818929E2FE08004F4780 /* EditStudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EB818829E2FE08004F4780 /* EditStudentIDCardVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,10 +56,11 @@
 		85482A2429CC4B0D00F79893 /* SignupPWVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPWVC.swift; sourceTree = "<group>"; };
 		85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStudentNumberVC.swift; sourceTree = "<group>"; };
 		8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDCardVC.swift; sourceTree = "<group>"; };
+		858A5B4429EE675D009ACE57 /* SignupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupData.swift; sourceTree = "<group>"; };
 		85963EE929D5D65A0068EC3E /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
 		85BEC5A129D558F200B9948E /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		85CB7E4929E7F0B60078F2AB /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
-		85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentShowMealsView.swift; sourceTree = "<group>"; };
+		85E292CF29D3D45B0054E012 /* StudentShowMealsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentShowMealsVC.swift; sourceTree = "<group>"; };
 		85EB818829E2FE08004F4780 /* EditStudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStudentIDCardVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +71,11 @@
 			files = (
 				8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */,
 				854141A729C9A8F70063DF27 /* SnapKit in Frameworks */,
+				8568F8B829F645CB000E6981 /* JWTDecode in Frameworks */,
+				85E3B93329F48FE000B2D2F3 /* Realm in Frameworks */,
+				85E3B93529F48FE000B2D2F3 /* RealmSwift in Frameworks */,
 				854141A129C9A8D40063DF27 /* Then in Frameworks */,
+				85DA8DC229F7A1A5008D9BC7 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */,
-				85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */,
+				85E292CF29D3D45B0054E012 /* StudentShowMealsVC.swift */,
 				85BEC5A129D558F200B9948E /* BottomSheetView.swift */,
 				85EB818829E2FE08004F4780 /* EditStudentIDCardVC.swift */,
 			);
@@ -185,6 +195,7 @@
 				85963EE929D5D65A0068EC3E /* Signin.swift */,
 				850960E829DE9F6000B16E87 /* GetMealsAPI.swift */,
 				85CB7E4929E7F0B60078F2AB /* Token.swift */,
+				858A5B4429EE675D009ACE57 /* SignupData.swift */,
 			);
 			path = Mobel;
 			sourceTree = "<group>";
@@ -209,6 +220,10 @@
 				854141A029C9A8D40063DF27 /* Then */,
 				854141A629C9A8F70063DF27 /* SnapKit */,
 				8588874B29CABCDD00D0CDAA /* Alamofire */,
+				85E3B93229F48FE000B2D2F3 /* Realm */,
+				85E3B93429F48FE000B2D2F3 /* RealmSwift */,
+				8568F8B729F645CB000E6981 /* JWTDecode */,
+				85DA8DC129F7A1A5008D9BC7 /* SwiftKeychainWrapper */,
 			);
 			productName = LetsEatingTime;
 			productReference = 8541418829C9A6C50063DF27 /* LetsEatingTime.app */;
@@ -242,6 +257,9 @@
 				8541419F29C9A8D40063DF27 /* XCRemoteSwiftPackageReference "Then" */,
 				854141A529C9A8F70063DF27 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				8588874A29CABCDD00D0CDAA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				85E3B93129F48FE000B2D2F3 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				8568F8B629F645CB000E6981 /* XCRemoteSwiftPackageReference "JWTDecode" */,
+				85DA8DC029F7A1A5008D9BC7 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 			);
 			productRefGroup = 8541418929C9A6C50063DF27 /* Products */;
 			projectDirPath = "";
@@ -280,9 +298,10 @@
 				8541418C29C9A6C50063DF27 /* AppDelegate.swift in Sources */,
 				85CB7E4A29E7F0B60078F2AB /* Token.swift in Sources */,
 				850960E929DE9F6000B16E87 /* GetMealsAPI.swift in Sources */,
+				858A5B4529EE675D009ACE57 /* SignupData.swift in Sources */,
 				85BEC5A229D558F200B9948E /* BottomSheetView.swift in Sources */,
 				8541418E29C9A6C50063DF27 /* SceneDelegate.swift in Sources */,
-				85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */,
+				85E292D029D3D45B0054E012 /* StudentShowMealsVC.swift in Sources */,
 				85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */,
 				85EB818929E2FE08004F4780 /* EditStudentIDCardVC.swift in Sources */,
 				8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */,
@@ -514,12 +533,36 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		8568F8B629F645CB000E6981 /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		8588874A29CABCDD00D0CDAA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
+			};
+		};
+		85DA8DC029F7A1A5008D9BC7 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		85E3B93129F48FE000B2D2F3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.38.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -535,10 +578,30 @@
 			package = 854141A529C9A8F70063DF27 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
+		8568F8B729F645CB000E6981 /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8568F8B629F645CB000E6981 /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
+		};
 		8588874B29CABCDD00D0CDAA /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8588874A29CABCDD00D0CDAA /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		85DA8DC129F7A1A5008D9BC7 /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85DA8DC029F7A1A5008D9BC7 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+		85E3B93229F48FE000B2D2F3 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85E3B93129F48FE000B2D2F3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		85E3B93429F48FE000B2D2F3 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85E3B93129F48FE000B2D2F3 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
