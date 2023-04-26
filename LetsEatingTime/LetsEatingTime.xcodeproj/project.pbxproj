@@ -23,6 +23,7 @@
 		85482A2329CC4AFD00F79893 /* SignupIDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2229CC4AFD00F79893 /* SignupIDVC.swift */; };
 		85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2429CC4B0D00F79893 /* SignupPWVC.swift */; };
 		85482A2729CC4B7600F79893 /* SignupStudentNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */; };
+		8565301529F8BD340054DC4A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8565301429F8BD340054DC4A /* .swiftlint.yml */; };
 		8568F8B829F645CB000E6981 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8568F8B729F645CB000E6981 /* JWTDecode */; };
 		8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */; };
 		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -55,6 +56,7 @@
 		85482A2229CC4AFD00F79893 /* SignupIDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupIDVC.swift; sourceTree = "<group>"; };
 		85482A2429CC4B0D00F79893 /* SignupPWVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPWVC.swift; sourceTree = "<group>"; };
 		85482A2629CC4B7600F79893 /* SignupStudentNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStudentNumberVC.swift; sourceTree = "<group>"; };
+		8565301429F8BD340054DC4A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8588874529CAA53100D0CDAA /* StudentIDCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIDCardVC.swift; sourceTree = "<group>"; };
 		858A5B4429EE675D009ACE57 /* SignupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupData.swift; sourceTree = "<group>"; };
 		85963EE929D5D65A0068EC3E /* Signin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signin.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 		8541417F29C9A6C50063DF27 = {
 			isa = PBXGroup;
 			children = (
+				8565301429F8BD340054DC4A /* .swiftlint.yml */,
 				8541418A29C9A6C50063DF27 /* LetsEatingTime */,
 				8541418929C9A6C50063DF27 /* Products */,
 			);
@@ -210,6 +213,7 @@
 				8541418429C9A6C50063DF27 /* Sources */,
 				8541418529C9A6C50063DF27 /* Frameworks */,
 				8541418629C9A6C50063DF27 /* Resources */,
+				8565301229F8BCD50054DC4A /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -275,12 +279,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8565301529F8BD340054DC4A /* .swiftlint.yml in Resources */,
 				8541419829C9A6C50063DF27 /* LaunchScreen.storyboard in Resources */,
 				8541419529C9A6C50063DF27 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8565301229F8BCD50054DC4A /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8541418429C9A6C50063DF27 /* Sources */ = {
