@@ -7,13 +7,9 @@
 
 import Foundation
 
-struct GetMealsAPI {
-    let status: Int
-    let data: MealsDatas
-}
-struct MealsDatas {
-    let breakfast: String
-    let lunch: String
-    let dinner: String
+struct MealsData: Codable {
+    let breakfast: String!
+    let lunch: String!
+    let dinner: String!
 }
 
