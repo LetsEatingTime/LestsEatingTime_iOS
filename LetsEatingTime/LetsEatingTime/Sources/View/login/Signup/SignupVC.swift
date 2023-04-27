@@ -180,15 +180,14 @@ extension SignupVC {
             $0.right.equalToSuperview().offset(-45)
         }
         eatingFoodImage.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(200)
             $0.width.equalTo(435)
             $0.height.equalTo(367)
             $0.left.equalToSuperview().offset(0)
-            $0.bottom.equalTo(progressView.snp.top).offset(-10)
         }
     }
 }
 extension SignupVC {
-    
     func gradeStringToInt(from originalString: String) -> Int? {
         if originalString.count >= 1 {
             let gradeIndex = originalString.index(originalString.startIndex, offsetBy: 0)
@@ -199,7 +198,6 @@ extension SignupVC {
             return 00
         }
     }
-    
     func classNameStringToInt(from originalString: String) -> Int? {
         if originalString.count >= 2 {
             let string = originalString.index(originalString.startIndex, offsetBy: 1)
@@ -222,7 +220,6 @@ extension SignupVC {
             return 00
         }
     }
-    
     func organizeInfomation() {
         let id = idVC.idTextField.text!
         let pw = pwVC.pwTextField.text!
@@ -248,24 +245,20 @@ extension SignupVC {
         let className = classNameStringToInt(from: studentNumber)!
         
         let classNo = classNoStringToInt(from: studentNumber)!
+        print("id: \(id), \npw: \(pw), \nname: \(name), \ngrade: \(grade), \nclassName: \(className), \nclassNo: \(classNo)")
         
-        let sessionManager: Session = {
-                let serverTrustPolices = ServerTrustManager(evaluators: [api: DisabledTrustEvaluator()])
-                let configuration = URLSessionConfiguration.af.default
-                configuration.timeoutIntervalForRequest = 100111
-                return Session(configuration: configuration, serverTrustManager: serverTrustPolices)
-            }()
-        
-        sessionManager.request("\(api)/api/account/signup.do",
-                               method: .post,
-                               parameters: ["id": id,
-                                            "pw": pw,
-                                            "name": name,
-                                            "grade": grade,
-                                            "className": className,
-                                            "classNo": classNo],
-                               encoding : JSONEncoding.default,
-                               headers: ["Content-Type": "application/json"]
+        AF.request("\(api)/api/account/signup.do",
+                   method: .post,
+                   parameters: [
+                    "id": id,
+                    "password": pw,
+                    "name": name,
+                    "grade": grade,
+                    "className": className,
+                    "classNo": classNo
+                   ],
+                   encoding : JSONEncoding.default,
+                   headers: ["Content-Type": "application/json"]
         )
         .validate()
         .responseData { response in
@@ -277,5 +270,4 @@ extension SignupVC {
             }
         }
     }
-    
 }
