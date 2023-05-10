@@ -8,19 +8,35 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class Token {
-    enum TokenType: String, Codable {
-        case grantType
-        case accessToken
-        case refreshToken
+struct Token: Codable {
+    let status: Int!
+    let data: Tokens!
+}
+struct Tokens: Codable {
+    var grantType: String!
+    var accessToken: String!
+    var refreshToken: String!
+}
+
+enum TokenType {
+    case grantType
+    case accessToken
+    case refreshToken
+}
+class TokenManager {
+    
+    static func save(_ tokenType: TokenType, _ value: String) {
+        UserDefaults.standard.set(value, forKey: String(describing: tokenType))
     }
-    static func setKeychain(_ value: String, forKey keychainKey: TokenType) {
-        KeychainWrapper.standard.set(value, forKey: keychainKey.rawValue)
+    
+    static func get(_ tokenType: TokenType) -> String? {
+        return UserDefaults.standard.string(forKey: String(describing: tokenType))
     }
-    static func getKeychainValue(forKey keychainKey: TokenType) -> String? {
-        return KeychainWrapper.standard.string(forKey: keychainKey.rawValue)
+
+    static func remove(_ tokenType: TokenType) {
+        UserDefaults.standard.removeObject(forKey: String(describing: tokenType))
     }
-    static func removeKeychain(forKey keychainKey: TokenType) {
-        KeychainWrapper.standard.removeObject(forKey: keychainKey.rawValue)
-    }
+
+//    Token.save(.accessToken, data.accessToken)
+//    Token.save(.refreshToken, data.refreshToken)
 }
