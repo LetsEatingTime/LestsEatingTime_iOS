@@ -12,20 +12,21 @@ import Then
 class SignupPWVC: UIViewController {
     let pwLabel = UILabel().then {
         $0.text = "비밀번호"
-        $0.font = .systemFont(ofSize:30.0, weight: .bold)
+        $0.font = .systemFont(ofSize: 30.0, weight: .bold)
     }
     let pwTextField = UITextField().then {
         $0.placeholder = "비밀번호를 입력해주세요"
-        $0.font = .systemFont(ofSize:14.0, weight: . medium)
-        $0.autocapitalizationType = .none
-        $0.backgroundColor = .clear
-    }
-    let pwChackTextField = UITextField().then {
-        $0.placeholder = "비밀번호를 확인해주세요"
-        $0.font = .systemFont(ofSize:14.0, weight: . medium)
+        $0.font = .systemFont(ofSize: 14.0, weight: . medium)
         $0.autocapitalizationType = .none
         $0.backgroundColor = .clear
         $0.isSecureTextEntry = true
+    }
+    let pwChackTextField = UITextField().then {
+        $0.placeholder = "비밀번호를 확인해주세요"
+        $0.font = .systemFont(ofSize: 14.0, weight: . medium)
+        $0.isSecureTextEntry = true
+        $0.autocapitalizationType = .none
+        $0.backgroundColor = .clear
     }
     let line = UIView().then {
         $0.backgroundColor = .black
@@ -33,7 +34,6 @@ class SignupPWVC: UIViewController {
     let line2 = UIView().then {
         $0.backgroundColor = .black
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -82,3 +82,4 @@ class SignupPWVC: UIViewController {
     }
     
 }
+

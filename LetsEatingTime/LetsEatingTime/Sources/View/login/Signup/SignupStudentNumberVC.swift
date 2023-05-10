@@ -12,23 +12,22 @@ import SnapKit
 class SignupStudentNumberVC: UIViewController {
     let studentNumberLabel = UILabel().then {
         $0.text = "학번"
-        $0.font = .systemFont(ofSize:25.0, weight: .bold)
+        $0.font = .systemFont(ofSize: 25.0, weight: .bold)
     }
     let exampleStudentNumberLabel = UILabel().then {
         $0.text = "예) 1120"
-        $0.font = .systemFont(ofSize:14.0, weight: .medium)
+        $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         $0.textAlignment = .left
     }
     let studentNumberTextField = UITextField().then {
         $0.placeholder = "학번를 입력해주세요"
-        $0.font = .systemFont(ofSize:14.0, weight: . medium)
+        $0.font = .systemFont(ofSize: 14.0, weight: . medium)
         $0.autocapitalizationType = .none
         $0.backgroundColor = .clear
     }
     let line = UIView().then {
         $0.backgroundColor = .black
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -42,7 +41,7 @@ class SignupStudentNumberVC: UIViewController {
             exampleStudentNumberLabel,
             studentNumberTextField,
             line
-        ].forEach{ self.view.addSubview($0) }
+        ].forEach { self.view.addSubview($0) }
         studentNumberLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalTo(studentNumberLabel.snp.top).offset(50)

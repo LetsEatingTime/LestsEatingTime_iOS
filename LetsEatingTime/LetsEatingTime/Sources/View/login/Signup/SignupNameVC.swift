@@ -23,7 +23,6 @@ class SignupNameVC: UIViewController {
     let line = UIView().then {
         $0.backgroundColor = .black
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()

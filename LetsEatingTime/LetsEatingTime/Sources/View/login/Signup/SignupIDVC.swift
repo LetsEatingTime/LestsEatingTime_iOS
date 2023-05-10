@@ -16,15 +16,14 @@ class SignupIDVC: UIViewController, UITextFieldDelegate {
         $0.backgroundColor = .clear
     }
     let idTextField = UITextField().then {
-        $0.placeholder = "이름를 입력해주세요"
-        $0.font = .systemFont(ofSize:14.0, weight: . medium)
+        $0.placeholder = "아이디를 입력해주세요"
+        $0.font = .systemFont(ofSize: 14.0, weight: . medium)
         $0.autocapitalizationType = .none
         $0.backgroundColor = .clear
     }
     let line = UIView().then {
         $0.backgroundColor = .black
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -38,7 +37,7 @@ class SignupIDVC: UIViewController, UITextFieldDelegate {
             idLabel,
             idTextField,
             line
-        ].forEach{ self.view.addSubview($0) }
+        ].forEach { self.view.addSubview($0) }
         idLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalTo(idLabel.snp.top).offset(50)
@@ -62,12 +61,12 @@ class SignupIDVC: UIViewController, UITextFieldDelegate {
 extension SignupIDVC {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch (textField.text, textField.text!.count, range.length, range.location) {
-        case let (text, count, 0, location) where count >= 4 && location < 4:
+        case let (_, count, 0, location) where count >= 4 && location < 4:
             line.backgroundColor = .red
             idTextField.textColor = .red
             return false
         default:
             return true
         }
-        }
+    }
 }
