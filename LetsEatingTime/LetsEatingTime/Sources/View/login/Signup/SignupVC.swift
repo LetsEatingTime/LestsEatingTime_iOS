@@ -1,4 +1,3 @@
-
 //
 //  Signup.swift
 //  LetsEatingTime
@@ -56,7 +55,6 @@ class SignupVC: UIViewController {
     var myStudentNumberView: UIView {
         self.studentNumberVC.view
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -101,7 +99,6 @@ extension SignupVC {
             print("예기치못한 오류ㅠㅠ")
         }
     }
-    
     @objc func didPressSignupNextButton() {
         print("didPressSignupNextButton")
         switch children.first {
@@ -135,7 +132,6 @@ extension SignupVC {
             print("예기치못한 오류ㅠㅠ")
         }
     }
-    
     func configureUIView() {
         addChild(idVC)
         self.uiView.addSubview(myIDView)
@@ -148,7 +144,7 @@ extension SignupVC {
             progressView,
             backButton,
             signupNextButton
-        ].forEach{ self.view.addSubview($0) }
+        ].forEach { self.view.addSubview($0) }
         logo.snp.makeConstraints {
             $0.top.equalToSuperview().offset(-150)
             $0.bottom.equalTo(logo.snp.top).offset(100)
@@ -193,9 +189,9 @@ extension SignupVC {
             let gradeIndex = originalString.index(originalString.startIndex, offsetBy: 0)
             let substring = originalString[gradeIndex]
             return Int(String(substring))
-        }else {
-            print("nil")
-            return 00
+        } else {
+            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 종료후 다시 실행해주세요 /n(계속 오류가 발생한다면 최시훈한테 연락주세요.")
+            return nil
         }
     }
     func classNameStringToInt(from originalString: String) -> Int? {
@@ -203,11 +199,10 @@ extension SignupVC {
             let string = originalString.index(originalString.startIndex, offsetBy: 1)
             let substring = originalString[string]
             return Int(String(substring))
-        }else {
-            print("nil")
-            return 00
+        } else {
+            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 종료후 다시 실행해주세요 /n(계속 오류가 발생한다면 최시훈한테 연락주세요.")
+            return nil
         }
-        
     }
     func classNoStringToInt(from originalString: String) -> Int? {
         if originalString.count >= 4 {
@@ -215,49 +210,50 @@ extension SignupVC {
             let end = originalString.index(originalString.startIndex, offsetBy: 3)
             let substring = originalString[start...end]
             return Int(substring)
-        }else {
-            print("nil")
-            return 00
+        } else {
+            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 종료후 다시 실행해주세요 /n(계속 오류가 발생한다면 최시훈한테 연락주세요☺️)")
+            return nil
         }
     }
     func organizeInfomation() {
-        let id = idVC.idTextField.text!
-        let pw = pwVC.pwTextField.text!
+        let idText = idVC.idTextField.text!
+        let pwText = pwVC.pwTextField.text!
         let name = nameVC.nameTextField.text!
         let studentNumber = studentNumberVC.studentNumberTextField.text!
-        if id == "" || pw == "" || name == "" || studentNumber.count != 4 {
-            let alertController = UIAlertController(title: "경고⚠️", message: "입력한 정보를 확인해주세요!", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: true, completion: nil)
+        if idText == "" || pwText == "" || name == "" || studentNumber.count != 4 {
+            showAlert(title: "경고⚠️", message: "입력한 정보를 확인해주세요!")
         } else {
             contactToServer()
         }
     }
+    func differentOrNot() {
+        let pwText = pwVC.pwTextField.text!
+        let pwChackText = pwVC.pwChackTextField.text!
+        if pwText == pwChackText {
+            contactToServer()
+        } else {
+            
+        }
+    }
     func contactToServer() {
-        let id = idVC.idTextField.text!
-        let pw = pwVC.pwTextField.text!
+        let idText = idVC.idTextField.text!
+        let pwText = pwVC.pwTextField.text!
         let name = nameVC.nameTextField.text!
         let studentNumber = studentNumberVC.studentNumberTextField.text!
-        
         let grade = gradeStringToInt(from: studentNumber)!
-        
         let className = classNameStringToInt(from: studentNumber)!
-        
         let classNo = classNoStringToInt(from: studentNumber)!
-        print("id: \(id), \npw: \(pw), \nname: \(name), \ngrade: \(grade), \nclassName: \(className), \nclassNo: \(classNo)")
-        
         AF.request("\(api)/api/account/signup.do",
                    method: .post,
                    parameters: [
-                    "id": id,
-                    "password": pw,
+                    "id": idText,
+                    "password": pwText,
                     "name": name,
                     "grade": grade,
                     "className": className,
                     "classNo": classNo
                    ],
-                   encoding : JSONEncoding.default,
+                   encoding: JSONEncoding.default,
                    headers: ["Content-Type": "application/json"]
         )
         .validate()
@@ -266,7 +262,7 @@ extension SignupVC {
             case.success:
                 self.dismiss(animated: true)
             case.failure(let error):
-                print("통신 오류!\nCode:\(error._code), Message: \(error.errorDescription!)")
+                showAlert(title: "Error⚠️\(error._code)", message: "네트워크 연결 상태를 확인해주세요!")
             }
         }
     }

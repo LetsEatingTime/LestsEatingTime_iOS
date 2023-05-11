@@ -10,7 +10,7 @@ import Foundation
 struct SignupData: Decodable, Hashable {
     let status: Int
     let message: String
-    let data: LoginDatas
+    let data: SignupDatas
 }
 
 struct SignupDatas: Decodable, Hashable {
