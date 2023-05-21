@@ -13,7 +13,6 @@ import JWTDecode
 import SwiftKeychainWrapper
 
 class SigninVC: UIViewController {
-    
     let logoImage = UILabel().then {
         //        $0.image = (UIImage(named: ""))
         $0.text = "레츠이팅타임"
@@ -68,6 +67,7 @@ class SigninVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setup()
+        chackToken()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -86,33 +86,33 @@ extension SigninVC {
         let idText = idTextField.text!
         let pwText = pwTextField.text!
         print("\(idText), \(pwText)")
-        AF.request("\(api)/api/account/login.do",
-                   method: .post,
-                   parameters: [
-                    "id": idText,
-                    "password": pwText
-                   ],
-                   encoding: JSONEncoding.default,
-                   headers: ["Content-Type": "application/json"]
-        )
-        .validate()
-        .responseDecodable(of: Token.self) { response in
-            switch response.result {
-            case.success(let value):
-                do {
-                    TokenManager.save(.grantType, value.data.grantType!)
-                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
-                    TokenManager.save(.refreshToken, value.data.refreshToken!)
-                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
-                    TokenManager.save(.accessToken, value.data.accessToken!)
-                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
+//        AF.request("\(api)/api/account/login.do",
+//                   method: .post,
+//                   parameters: [
+//                    "id": idText,
+//                    "password": pwText
+//                   ],
+//                   encoding: JSONEncoding.default,
+//                   headers: ["Content-Type": "application/json"]
+//        )
+//        .validate()
+//        .responseDecodable(of: Token.self) { response in
+//            switch response.result {
+//            case.success(let value):
+//                do {
+//                    TokenManager.save(.grantType, value.data.grantType!)
+//                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
+//                    TokenManager.save(.refreshToken, value.data.refreshToken!)
+//                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
+//                    TokenManager.save(.accessToken, value.data.accessToken!)
+//                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
                     self.present()
-                }
-            case.failure(let error):
-                self.showAlert(title: "경고⚠️", message: "네트워크 연결을 확인해주세요.\(error.localizedDescription)")
-                print("\(error.localizedDescription)")
-            }
-        }
+//                }
+//            case.failure(let error):
+//                showAlert(title: "경고⚠️ \(error._code)", message: "네트워크 연결을 확인해주세요.")
+//                print("\(error.localizedDescription)")
+//            }
+//        }
     }
     @objc func didPressGoTosignupButton() {
         let viewController = SignupVC()
@@ -177,11 +177,22 @@ extension SigninVC {
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+    func chackToken() {
+//        AF.request("\(api)/api/account/refresh.do",
+//                   method: .post,
+//                   headers: ["Authorization": "\(String(describing: TokenManager.get(.grantType)!)) \(String(describing: TokenManager.get(.accessToken)!))"]
+//        )
+//        .validate()
+//        .responseDecodable(of: Token.self) { response in
+//            switch response.result {
+//            case.success(let value):
+//                TokenManager.save(.accessToken, value.data.accessToken!)
+//                TokenManager.save(.refreshToken, value.data.refreshToken!)
+//                self.present()
+//            case .failure(let error):
+//                print("로그인 다시하셈 ㅅㄱ\(error._code) \(error.localizedDescription)")
+//
+//            }
+//        }
     }
-    
 }

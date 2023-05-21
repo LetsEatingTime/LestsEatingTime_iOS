@@ -26,6 +26,7 @@ class SignupIDVC: UIViewController, UITextFieldDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         setup()
         idTextField.delegate = self
     }

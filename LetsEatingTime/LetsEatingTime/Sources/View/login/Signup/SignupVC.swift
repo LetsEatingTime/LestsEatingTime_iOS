@@ -96,7 +96,7 @@ extension SignupVC {
                 self.progressView.setProgress(0.75, animated: true)
             }
         default:
-            print("예기치못한 오류ㅠㅠ")
+            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요")
         }
     }
     @objc func didPressSignupNextButton() {
@@ -118,6 +118,7 @@ extension SignupVC {
             UIView.animate(withDuration: 0.6) {
                 self.progressView.setProgress(0.75, animated: true)
             }
+            differentOrNot()
         case nameVC:
             addChild(studentNumberVC)
             self.uiView.addSubview(myStudentNumberView)
@@ -129,7 +130,7 @@ extension SignupVC {
         case studentNumberVC:
             organizeInfomation()
         default:
-            print("예기치못한 오류ㅠㅠ")
+            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요")
         }
     }
     func configureUIView() {
@@ -190,7 +191,7 @@ extension SignupVC {
             let substring = originalString[gradeIndex]
             return Int(String(substring))
         } else {
-            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 종료후 다시 실행해주세요 /n(계속 오류가 발생한다면 최시훈한테 연락주세요.")
+            showAlert(title: "경고⚠️", message: "학번을 다시 입력해주세요.")
             return nil
         }
     }
@@ -200,7 +201,7 @@ extension SignupVC {
             let substring = originalString[string]
             return Int(String(substring))
         } else {
-            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 종료후 다시 실행해주세요 /n(계속 오류가 발생한다면 최시훈한테 연락주세요.")
+            showAlert(title: "경고⚠️", message: "학번을 다시 입력해주세요.")
             return nil
         }
     }
@@ -211,7 +212,7 @@ extension SignupVC {
             let substring = originalString[start...end]
             return Int(substring)
         } else {
-            showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 종료후 다시 실행해주세요 /n(계속 오류가 발생한다면 최시훈한테 연락주세요☺️)")
+            showAlert(title: "경고⚠️", message: "학번을 다시 입력해주세요.")
             return nil
         }
     }
@@ -221,7 +222,7 @@ extension SignupVC {
         let name = nameVC.nameTextField.text!
         let studentNumber = studentNumberVC.studentNumberTextField.text!
         if idText == "" || pwText == "" || name == "" || studentNumber.count != 4 {
-            showAlert(title: "경고⚠️", message: "입력한 정보를 확인해주세요!")
+            showAlert(title: "경고⚠️", message: "입력한 정보를 확인해주세요.")
         } else {
             contactToServer()
         }
@@ -232,7 +233,7 @@ extension SignupVC {
         if pwText == pwChackText {
             contactToServer()
         } else {
-            
+            showAlert(title: "경고⚠️", message: "비밀번호를 확인해주세요")
         }
     }
     func contactToServer() {

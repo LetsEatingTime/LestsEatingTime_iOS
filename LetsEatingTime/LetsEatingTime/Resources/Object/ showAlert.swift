@@ -10,9 +10,8 @@ func showAlert(title: String, message: String) {
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
     alertController.addAction(okAction)
-    
-    guard let currentViewController = UIApplication.shared.keyWindow?.rootViewController else {
-        return
+    if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+        // UIAlertController를 present 합니다.
+        rootViewController.present(alertController, animated: true, completion: nil)
     }
-    currentViewController.present(alertController, animated: true, completion: nil)
 }
