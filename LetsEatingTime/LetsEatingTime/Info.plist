@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NFCReaderUsageDescription</key>
+	<string>이거 안 쓰면 교장쌤한테 혼남</string>
 	<key>CFBundleIdentifier</key>
 	<string></string>
 	<key>NSAppTransportSecurity</key>
@@ -13,8 +15,8 @@
 	<dict>
 		<key>Appearance</key>
 		<string>Light</string>
-        <key>UIUserInterfaceStyle</key>
-        <string>Light</string>
+		<key>UIUserInterfaceStyle</key>
+		<string>Light</string>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 		<key>UISceneConfigurations</key>
@@ -22,8 +24,8 @@
 			<key>UIWindowSceneSessionRoleApplication</key>
 			<array>
 				<dict>
-                    <key>UISceneConfigurationName</key>
-                    <string>Default Configuration</string>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 				</dict>
