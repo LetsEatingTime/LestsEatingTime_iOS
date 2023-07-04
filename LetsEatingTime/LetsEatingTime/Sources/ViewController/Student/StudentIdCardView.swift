@@ -72,7 +72,6 @@ class StudentIdCardView: UIView {
                    encoding: JSONEncoding.default,
                    headers: ["Content-Type": "application/json"]
         )
-        
     }
 func setup() {
     [
