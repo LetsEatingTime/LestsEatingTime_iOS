@@ -11,7 +11,6 @@ func showAlert(title: String, message: String) {
     let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
     alertController.addAction(okAction)
     if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
-        // UIAlertController를 present 합니다.
         rootViewController.present(alertController, animated: true, completion: nil)
     }
 }
