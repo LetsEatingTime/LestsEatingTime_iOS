@@ -11,12 +11,6 @@ import SnapKit
 import Alamofire
 
 class StudentIdCardView: UIView {
-    let studentGrade = StudentIdCard().studentGrade
-    
-    let studentClass = StudentIdCard().studentClass
-    
-    let studentNumber = StudentIdCard().studentNumber
-    let studentIdCard = StudentIdCard()
     let backgroundImage = UIImageView().then {
         $0.image = UIImage(named: "StudentIdCardBackgroundImage")
     }
@@ -34,12 +28,12 @@ class StudentIdCardView: UIView {
         $0.image = UIImage(named: "LeeChanHuk")
     }
     let studentIdCardNameLabel = UILabel().then {
-        $0.text = "\(StudentIdCard().studentName)"
+        $0.text = "최시훈"
         $0.font = .systemFont(ofSize: 36, weight: .semibold)
         $0.textAlignment = .center
     }
     let studentIdCardGradeLabel = UILabel().then {
-        $0.text = "\(StudentIdCard().studentGrade)학년 \(StudentIdCard().studentClass)반 \(StudentIdCard().studentNumber)번"
+        $0.text = "1학년 1반 11번호"
         $0.font = .systemFont(ofSize: 30, weight: .medium)
         $0.textAlignment = .center
     }
@@ -48,7 +42,6 @@ class StudentIdCardView: UIView {
         $0.font = .systemFont(ofSize: 11, weight: .light)
         $0.textAlignment = .center
     }
-    
     let image = UIImageView().then {
         $0.image = UIImage(named: "DGSW")
     }
@@ -57,66 +50,71 @@ class StudentIdCardView: UIView {
         setup()
         getStudentInfomation()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    let parameter = [ "Token": TokenManager.get(.accessToken)! ]
     func getStudentInfomation() {
-        AF.request("\(api)/api/user/profile",
-                   method: .post,
-                   parameters: [
-                    "grade": studentGrade,
-                    "class": studentClass,
-                    "number": studentNumber
-                   ],
+        AF.request("\(api)/api/card/profile",
+                   method: .get,
                    encoding: JSONEncoding.default,
                    headers: ["Content-Type": "application/json"]
         )
+        .responseDecodable(of: StudentIdCard.self) { response in
+            switch response.result {
+            case .success(let value):
+                self.studentIdCardNameLabel.text = "\(value.studentName)"
+                self.studentIdCardGradeLabel.text = "\(value.studentGrade)학년 \(value.studentClass)반 \(value.studentNumber)번호"
+            case.failure(let error):
+                showAlert(title: "경고⚠️ \(error._code)", message: "네트워크 연결을 확인해주세요.")
+                print("\(error.localizedDescription)")
+            }
+        }
     }
-func setup() {
-    [
-        backgroundImage,
-        studentIdCardLabelKorean,
-        studentIdCardLabel,
-        studentIdCardImage,
-        studentIdCardNameLabel,
-        studentIdCardGradeLabel,
-        label,
-        image
-    ].forEach { self.addSubview($0) }
-    backgroundImage.snp.makeConstraints {
-        $0.top.equalToSuperview().offset(-30)
-        $0.centerX.equalToSuperview()
+    func setup() {
+        [
+            backgroundImage,
+            studentIdCardLabelKorean,
+            studentIdCardLabel,
+            studentIdCardImage,
+            studentIdCardNameLabel,
+            studentIdCardGradeLabel,
+            label,
+            image
+        ].forEach { self.addSubview($0) }
+        backgroundImage.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(-30)
+            $0.centerX.equalToSuperview()
+        }
+        studentIdCardLabelKorean.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(30)
+        }
+        studentIdCardLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(studentIdCardLabelKorean.snp.bottom).offset(2)
+        }
+        studentIdCardImage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(studentIdCardLabel.snp.bottom).offset(2)
+            $0.width.equalTo(150)
+            $0.height.equalTo(201)
+        }
+        studentIdCardNameLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(studentIdCardImage.snp.bottom).offset(5)
+        }
+        studentIdCardGradeLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(studentIdCardNameLabel.snp.bottom).offset(18)
+        }
+        label.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(studentIdCardGradeLabel.snp.bottom)
+        }
+        image.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(label.snp.bottom).offset(42)
+        }
     }
-    studentIdCardLabelKorean.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalToSuperview().offset(30)
-    }
-    studentIdCardLabel.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalTo(studentIdCardLabelKorean.snp.bottom).offset(2)
-    }
-    studentIdCardImage.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalTo(studentIdCardLabel.snp.bottom).offset(2)
-        $0.width.equalTo(150)
-        $0.height.equalTo(201)
-    }
-    studentIdCardNameLabel.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalTo(studentIdCardImage.snp.bottom).offset(5)
-    }
-    studentIdCardGradeLabel.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalTo(studentIdCardNameLabel.snp.bottom).offset(18)
-    }
-    label.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalTo(studentIdCardGradeLabel.snp.bottom)
-    }
-    image.snp.makeConstraints {
-        $0.centerX.equalToSuperview()
-        $0.top.equalTo(label.snp.bottom).offset(42)
-    }
-}
 }
