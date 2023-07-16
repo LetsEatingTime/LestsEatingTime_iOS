@@ -14,15 +14,12 @@ class StudentShowMealsVC: UIViewController {
     let dateLabel = UILabel().then {
         $0.text = "2023년 04월 06일"
         $0.layer.cornerRadius = 20
-        $0.backgroundColor = .systemRed
     }
     let breakfast = UIView().then {
         $0.layer.cornerRadius = 20
-        $0.backgroundColor = .systemRed
     }
     let breakfastImage = UIImageView().then {
-        $0.image = UIImage(named: "StudentIDCard")
-        $0.backgroundColor = .blue
+        $0.image = UIImage(named: "Breakfast")
     }
     let breakfastLabel = UILabel().then {
         $0.text = "아침급식이 없습니다 아침급식이 없습니다 아침급식이 없습니다 아침급식이 없습니다"
@@ -31,11 +28,9 @@ class StudentShowMealsVC: UIViewController {
     }
     let lunch = UIView().then {
         $0.layer.cornerRadius = 20
-        $0.backgroundColor = .systemRed
     }
     let lunchImage = UIImageView().then {
-        $0.image = UIImage(named: "")
-        $0.backgroundColor = .blue
+        $0.image = UIImage(named: "Lunch")
     }
     let lunchLabel = UILabel().then {
         $0.text = "점심급식이 없습니다 점심급식이 없습니다 점심급식이 없습니다 점심급식이 없습니다"
@@ -44,67 +39,51 @@ class StudentShowMealsVC: UIViewController {
     }
     let dinner = UIView().then {
         $0.layer.cornerRadius = 20
-        $0.backgroundColor = .systemRed
     }
     let dinnerImage = UIImageView().then {
-        $0.image = UIImage(named: "")
-        $0.backgroundColor = .blue
+        $0.image = UIImage(named: "Dinner")
     }
     let dinnerLabel = UILabel().then {
         $0.text = "저녁급식이 없습니다 저녁급식이 없습니다 저녁급식이 없습니다 저녁급식이 없습니다"
         $0.font = .systemFont(ofSize: 14, weight: .medium)
         $0.numberOfLines = 0
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setup()
         getMeals()
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    
 }
 
 extension StudentShowMealsVC {
     func getMeals() {
         let currentDate = Date()
         let calendar = Calendar.current
-        
         let year = calendar.component(.year, from: currentDate)
         let month = calendar.component(.month, from: currentDate)
         let day = calendar.component(.day, from: currentDate)
         let url = "https://dodam.b1nd.com/api/meal?year=\(year)&month=\(month)&day=\(day)"
-        
         AF.request(url, method: .get).responseDecodable(of: MealsData.self) { response in
-            // 응답 결과 처리
             switch response.result {
             case .success(let value):
                 if value.breakfast != nil {
                     self.breakfastLabel.text = value.breakfast
                 } else {
-                    self.breakfastLabel.text = "아침이 없습니다"
+                    self.breakfastLabel.text = "아침이 없습니다."
                 }
                 if value.breakfast != nil {
                     self.lunchLabel.text = value.lunch
                 } else {
-                    self.lunchLabel.text = "점심이 없습니다"
+                    self.lunchLabel.text = "저녁이 없습니다."
                 }
                 if value.breakfast != nil {
                     self.dinnerLabel.text = value.dinner
                 } else {
-                    self.dinnerLabel.text = "저녁이 없습니다"
+                    self.dinnerLabel.text = "저녁이 없습니다."
                 }
             case .failure(let error):
                 print(error.localizedDescription)
-                let alertController = UIAlertController(title: "경고⚠️", message: "급식 정보를 가져오지 못했습니다🥲", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -122,7 +101,7 @@ extension StudentShowMealsVC {
             breakfastLabel,
             lunchLabel,
             dinnerLabel
-        ].forEach{self.view.addSubview($0)}
+        ].forEach { self.view.addSubview($0) }
         breakfast.snp.makeConstraints {
             $0.top.equalToSuperview().offset(40)
             $0.left.equalToSuperview().offset(40)
