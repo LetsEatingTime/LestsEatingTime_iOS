@@ -7,4 +7,4 @@
 
 import Foundation
 
-public let api = "http://10.80.163.183:8080"
+public let api = "https://let.team-alt.com/api"
