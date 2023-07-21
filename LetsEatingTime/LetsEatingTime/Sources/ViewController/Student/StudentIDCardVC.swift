@@ -10,15 +10,12 @@ import SnapKit
 import Then
 import Alamofire
 import CoreNFC
-import os
 
-class StudentIDCardVC: UIViewController {
-    
+class StudentIdCardVC: UIViewController {
     let scrollView = UIScrollView()
-    
     var contentView = UIView()
-    
-    let studentIDCardView = StudentIdCardView().then {
+    let mealsStatusViews = UIView()
+    let studentIdCardView = StudentIdCardView().then {
         $0.layer.masksToBounds = false
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
@@ -26,22 +23,21 @@ class StudentIDCardVC: UIViewController {
         $0.layer.shadowOffset = CGSize(width: 0, height: 0)
         $0.layer.shadowRadius = 5
     }
-        let mealsLabel = UILabel().then {
-            $0.text = "급식이 없습니다"
-
-        }
+    let mealsLabel = UILabel().then {
+        $0.text = "급식이 없습니다"
+    }
     let mealsButton = UIButton().then {
         $0.backgroundColor = .clear
         $0.addTarget(self, action: #selector(didPressMealsButton), for: .touchUpInside)
     }
     let logoutButton = UIButton().then {
-        $0.backgroundColor = .myPinkColor
+        $0.backgroundColor = UIColor(named: "MyPinkColor")
         $0.setTitle("로그아웃", for: .normal)
         $0.layer.cornerRadius = 15
         $0.addTarget(self, action: #selector(didPressLogoutButton), for: .touchUpInside)
     }
     let withdrawalButton = UIButton().then {
-        $0.backgroundColor = .myPinkColor
+        $0.backgroundColor = UIColor(named: "MyPinkColor")
         $0.setTitle("회원 탈퇴", for: .normal)
         $0.layer.cornerRadius = 15
         $0.addTarget(self, action: #selector(didPressWithdrawalButton), for: .touchUpInside)
@@ -54,21 +50,20 @@ class StudentIDCardVC: UIViewController {
         $0.backgroundColor = .systemRed
         $0.layer.cornerRadius = 15
     }
-//  MARK: - LifeCycle
+    //  MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setup()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 }
-extension StudentIDCardVC {
+extension StudentIdCardVC {
     @objc func didPressMealsButton() {
         let VC = StudentShowMealsVC()
-        present(VC, animated: true, completion: nil)
+        self.present(VC, animated: true, completion: nil)
     }
     @objc func didPressLogoutButton() {
         let VC = SigninVC()
@@ -80,19 +75,18 @@ extension StudentIDCardVC {
         TokenManager.remove(.accessToken)
     }
     @objc func didPressWithdrawalButton() {
-        let VC = StudentShowMealsVC()
-        present(VC, animated: true, completion: nil)
+        print("didPressWithdrawalButton")
     }
 }
 //MARK: - SetupUI
-extension StudentIDCardVC {
+extension StudentIdCardVC {
     func setup() {
         scrollView.contentSize = CGSize(width: view.bounds.width, height: 1000)
         contentView.backgroundColor = .clear
         contentView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 1000))
         scrollView.addSubview(contentView)
-        contentView.addSubview(studentIDCardView)
-        studentIDCardView.snp.makeConstraints {
+        contentView.addSubview(studentIdCardView)
+        studentIdCardView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(329)
@@ -101,18 +95,18 @@ extension StudentIDCardVC {
         [
             mealsView,
             mealsButton,
-            mealsStatusView,
             logoutButton,
+            mealsStatusViews,
             withdrawalButton
         ].forEach { self.contentView.addSubview($0) }
         mealsView.snp.makeConstraints {
-            $0.top.equalTo(studentIDCardView.snp.bottom).offset(70)
+            $0.top.equalTo(studentIdCardView.snp.bottom).offset(70)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(mealsView.snp.top).offset(120)
         }
         mealsButton.snp.makeConstraints {
-            $0.top.equalTo(studentIDCardView.snp.bottom).offset(70)
+            $0.top.equalTo(studentIdCardView.snp.bottom).offset(70)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(mealsButton.snp.top).offset(120)
@@ -134,6 +128,13 @@ extension StudentIDCardVC {
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(mealsStatusView.snp.top).offset(200)
+        }
+        mealsStatusView.addSubview(mealsStatusViews)
+        mealsStatusViews.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         [
             scrollView

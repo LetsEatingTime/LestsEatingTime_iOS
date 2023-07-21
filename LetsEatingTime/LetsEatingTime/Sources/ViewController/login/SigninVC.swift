@@ -23,7 +23,7 @@ class SigninVC: UIViewController {
         $0.placeholder = "이메일을 입력해주세요"
         $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         $0.autocapitalizationType = .none
-        $0.backgroundColor = .secondColor
+        $0.backgroundColor = UIColor(named: "SecondColor")
         $0.leftViewMode = .always
         $0.rightViewMode = .always
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
@@ -35,7 +35,7 @@ class SigninVC: UIViewController {
         $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         $0.autocapitalizationType = .none
         $0.isSecureTextEntry = true
-        $0.backgroundColor = .secondColor
+        $0.backgroundColor = UIColor(named: "SecondColor")
         $0.leftViewMode = .always
         $0.rightViewMode = .always
         $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
@@ -43,13 +43,13 @@ class SigninVC: UIViewController {
         $0.layer.cornerRadius = 20
     }
     let signinButton = UIButton().then {
-        $0.backgroundColor = .mainColor
+        $0.backgroundColor = UIColor(named: "MainColor")
         $0.setTitle("로그인", for: .normal)
         $0.layer.cornerRadius = 20
         $0.addTarget(self, action: #selector(didPressSigninBt), for: .touchUpInside)
     }
     let signupButton = UIButton().then {
-        $0.backgroundColor = .mainColor
+        $0.backgroundColor = UIColor(named: "MainColor")
         $0.setTitle("회원가입", for: .normal)
         $0.layer.cornerRadius = 20
         $0.addTarget(self, action: #selector(didPressGoTosignupButton), for: .touchUpInside)
@@ -67,7 +67,7 @@ class SigninVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setup()
-        chackToken()
+//        chackToken()
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -83,36 +83,40 @@ extension SigninVC {
         }
     }
     @objc func didPressSigninBt() {
-//        let idText = idTextField.text!
-//        let pwText = pwTextField.text!
-//        print("\(idText), \(pwText)")
-//        AF.request("\(api)/api/account/login.do",
-//                   method: .post,
-//                   parameters: [
-//                    "id": idText,
-//                    "password": pwText
-//                   ],
-//                   encoding: JSONEncoding.default,
-//                   headers: ["Content-Type": "application/json"]
-//        )
-//        .validate()
-//        .responseDecodable(of: Token.self) { response in
-//            switch response.result {
-//            case.success(let value):
-//                do {
-//                    TokenManager.save(.grantType, value.data.grantType!)
-//                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
-//                    TokenManager.save(.refreshToken, value.data.refreshToken!)
-//                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
-//                    TokenManager.save(.accessToken, value.data.accessToken!)
-//                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
+        let idText = idTextField.text!
+        let pwText = pwTextField.text!
+        print("\(idText), \(pwText)")
+        AF.request("\(api)/api/account/login.do",
+                   method: .post,
+                   parameters: [
+                    "id": idText,
+                    "password": pwText
+                   ],
+                   encoding: JSONEncoding.default,
+                   headers: ["Content-Type": "application/json"]
+        )
+        .validate()
+        .responseDecodable(of: Token.self) { response in
+            switch response.result {
+            case.success(let value):
+                do {
+                    TokenManager.save(.grantType, value.data.grantType!)
+                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
+                    TokenManager.save(.refreshToken, value.data.refreshToken!)
+                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
+                    TokenManager.save(.accessToken, value.data.accessToken!)
+                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
                     self.present()
-//                }
-//            case.failure(let error):
-//                showAlert(title: "경고⚠️ \(error._code)", message: "네트워크 연결을 확인해주세요.")
-//                print("\(error.localizedDescription)")
-//            }
-//        }
+                }
+            case.failure(let error):
+                if error != nil {
+                    print("입력한 정보를 확인해주세요")
+                } else {
+//                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     @objc func didPressGoTosignupButton() {
         let viewController = SignupVC()
@@ -173,12 +177,13 @@ extension SigninVC {
         //        }
     }
     func present() {
-        let viewController = StudentIDCardVC()
+        let viewController = StudentIdCardVC()
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
-    func chackToken() {
-//        AF.request("\(api)/api/account/refresh.do",
+    
+//    func chackToken() {
+//                AF.request("\(api)/api/account/login.do",
 //                   method: .post,
 //                   headers: ["Authorization": "\(String(describing: TokenManager.get(.grantType)!)) \(String(describing: TokenManager.get(.accessToken)!))"]
 //        )
@@ -194,5 +199,5 @@ extension SigninVC {
 //
 //            }
 //        }
-    }
+//    }
 }

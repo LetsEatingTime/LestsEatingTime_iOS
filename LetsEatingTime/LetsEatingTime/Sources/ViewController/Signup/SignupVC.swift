@@ -21,11 +21,11 @@ class SignupVC: UIViewController {
     }
     let progressView = UIProgressView().then {
         $0.progress = 0.25
-        $0.trackTintColor = .mainColor
+        $0.trackTintColor = UIColor(named: "MainColor")
         $0.progressTintColor = .lightGray
     }
     let signupNextButton = UIButton().then {
-        $0.backgroundColor = .mainColor
+        $0.backgroundColor = UIColor(named: "MainColor")
         $0.setTitle("다음-->", for: .normal)
         $0.layer.cornerRadius = 20
         $0.addTarget(self, action: #selector(didPressSignupNextButton), for: .touchUpInside)
@@ -118,7 +118,6 @@ extension SignupVC {
             UIView.animate(withDuration: 0.6) {
                 self.progressView.setProgress(0.75, animated: true)
             }
-            differentOrNot()
         case nameVC:
             addChild(studentNumberVC)
             self.uiView.addSubview(myStudentNumberView)
@@ -128,7 +127,7 @@ extension SignupVC {
                 self.progressView.setProgress(1, animated: true)
             }
         case studentNumberVC:
-            organizeInfomation()
+            
         default:
             showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요")
         }
@@ -185,65 +184,12 @@ extension SignupVC {
     }
 }
 extension SignupVC {
-    func gradeStringToInt(from originalString: String) -> Int? {
-        if originalString.count >= 1 {
-            let gradeIndex = originalString.index(originalString.startIndex, offsetBy: 0)
-            let substring = originalString[gradeIndex]
-            return Int(String(substring))
-        } else {
-            showAlert(title: "경고⚠️", message: "학번을 다시 입력해주세요.")
-            return nil
-        }
-    }
-    func classNameStringToInt(from originalString: String) -> Int? {
-        if originalString.count >= 2 {
-            let string = originalString.index(originalString.startIndex, offsetBy: 1)
-            let substring = originalString[string]
-            return Int(String(substring))
-        } else {
-            showAlert(title: "경고⚠️", message: "학번을 다시 입력해주세요.")
-            return nil
-        }
-    }
-    func classNoStringToInt(from originalString: String) -> Int? {
-        if originalString.count >= 4 {
-            let start = originalString.index(originalString.startIndex, offsetBy: 2)
-            let end = originalString.index(originalString.startIndex, offsetBy: 3)
-            let substring = originalString[start...end]
-            return Int(substring)
-        } else {
-            showAlert(title: "경고⚠️", message: "학번을 다시 입력해주세요.")
-            return nil
-        }
-    }
-    func organizeInfomation() {
-        let idText = idVC.idTextField.text!
-        let pwText = pwVC.pwTextField.text!
-        let name = nameVC.nameTextField.text!
-        let studentNumber = studentNumberVC.studentNumberTextField.text!
-        if idText == "" || pwText == "" || name == "" || studentNumber.count != 4 {
-            showAlert(title: "경고⚠️", message: "입력한 정보를 확인해주세요.")
-        } else {
-            contactToServer()
-        }
-    }
-    func differentOrNot() {
-        let pwText = pwVC.pwTextField.text!
-        let pwChackText = pwVC.pwChackTextField.text!
-        if pwText == pwChackText {
-            contactToServer()
-        } else {
-            showAlert(title: "경고⚠️", message: "비밀번호를 확인해주세요")
-        }
-    }
     func contactToServer() {
         let idText = idVC.idTextField.text!
         let pwText = pwVC.pwTextField.text!
         let name = nameVC.nameTextField.text!
         let studentNumber = studentNumberVC.studentNumberTextField.text!
-        let grade = gradeStringToInt(from: studentNumber)!
-        let className = classNameStringToInt(from: studentNumber)!
-        let classNo = classNoStringToInt(from: studentNumber)!
+        
         AF.request("\(api)/api/account/signup.do",
                    method: .post,
                    parameters: [
