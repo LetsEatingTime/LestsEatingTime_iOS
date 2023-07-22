@@ -12,11 +12,11 @@ import SnapKit
 class SignupNameVC: UIViewController {
     let nameLabel = UILabel().then {
         $0.text = "이름"
-        $0.font = .systemFont(ofSize:30.0, weight: .bold)
+        $0.font = .systemFont(ofSize: 30.0, weight: .bold)
     }
     let nameTextField = UITextField().then {
         $0.placeholder = "이름를 입력해주세요"
-        $0.font = .systemFont(ofSize:14.0, weight: .medium)
+        $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         $0.autocapitalizationType = .none
         $0.backgroundColor = .clear
     }
@@ -35,7 +35,7 @@ class SignupNameVC: UIViewController {
             nameLabel,
             nameTextField,
             line
-        ].forEach{ self.view.addSubview($0) }
+        ].forEach { self.view.addSubview($0) }
         nameLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.bottom.equalTo(nameLabel.snp.top).offset(50)
