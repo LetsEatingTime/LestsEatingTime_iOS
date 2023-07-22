@@ -48,7 +48,7 @@ class SignupPWVC: UIViewController {
             pwChackTextField,
             line,
             line2
-        ].forEach{ self.view.addSubview($0) }
+        ].forEach { self.view.addSubview($0) }
         pwLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(0)
             $0.bottom.equalTo(pwLabel.snp.top).offset(50)
@@ -80,6 +80,4 @@ class SignupPWVC: UIViewController {
             $0.right.equalToSuperview().offset(-70)
         }
     }
-    
 }
-
