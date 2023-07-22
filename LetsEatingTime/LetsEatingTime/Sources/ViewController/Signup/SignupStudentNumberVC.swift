@@ -15,7 +15,7 @@ class SignupStudentNumberVC: UIViewController {
         $0.font = .systemFont(ofSize: 25.0, weight: .bold)
     }
     let exampleStudentNumberLabel = UILabel().then {
-        $0.text = "예) 1120"
+        $0.text = "예) 2109"
         $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         $0.textAlignment = .left
     }
