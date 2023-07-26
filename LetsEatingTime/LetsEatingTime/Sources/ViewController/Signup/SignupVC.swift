@@ -11,6 +11,7 @@ import Then
 import Alamofire
 
 class SignupVC: UIViewController {
+    
     let logo = UILabel().then {
         $0.text = "asdf"
         $0.font = .systemFont(ofSize: 100)
@@ -127,7 +128,24 @@ extension SignupVC {
                 self.progressView.setProgress(1, animated: true)
             }
         case studentNumberVC:
-            
+            let password = pwVC.pwTextField.text!
+            if isValidPassword(password) {
+                let studentNumber = studentNumberVC.studentNumberTextField.text!
+                if studentNumber.count == 4 {
+                    contactToServer()
+                } else {
+                    print("학버늘 다시 입력하세요")
+                }
+            } else {
+                print("비밀번호가 유효하지 않습니다.")
+                addChild(pwVC)
+                self.uiView.addSubview(myPWView)
+                studentNumberVC.removeFromParent()
+                myStudentNumberView.removeFromSuperview()
+                UIView.animate(withDuration: 0.6) {
+                    self.progressView.setProgress(0.5, animated: true)
+                }
+            }
         default:
             showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요")
         }
@@ -135,6 +153,9 @@ extension SignupVC {
     func configureUIView() {
         addChild(idVC)
         self.uiView.addSubview(myIDView)
+    }
+    func checkName() {
+        
     }
     func setup() {
         [
@@ -188,9 +209,15 @@ extension SignupVC {
         let idText = idVC.idTextField.text!
         let pwText = pwVC.pwTextField.text!
         let name = nameVC.nameTextField.text!
-        let studentNumber = studentNumberVC.studentNumberTextField.text!
-        
-        AF.request("\(api)/api/account/signup.do",
+        let inputString = studentNumberVC.studentNumberTextField.text!
+        let digitsOnly = inputString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        let index1 = digitsOnly.index(digitsOnly.startIndex, offsetBy: 1)
+        let index2 = digitsOnly.index(digitsOnly.startIndex, offsetBy: 2)
+        let index3 = digitsOnly.index(digitsOnly.startIndex, offsetBy: 3)
+        let grade = Int(String(digitsOnly[digitsOnly.startIndex]))!
+        let className = Int(String(digitsOnly[index1]))!
+        let classNo = Int(String(digitsOnly[index2..<index3]))!
+        AF.request("\(api)/account/signup.do",
                    method: .post,
                    parameters: [
                     "id": idText,
@@ -209,8 +236,16 @@ extension SignupVC {
             case.success:
                 self.dismiss(animated: true)
             case.failure(let error):
-                showAlert(title: "Error⚠️\(error._code)", message: "네트워크 연결 상태를 확인해주세요!")
+//                showAlert(title: "Error⚠️\(error._code)", message: "네트워크 연결 상태를 확인해주세요!")
+                print("\n ⚠️NETWORK ERROR \(error.localizedDescription)\n")
             }
         }
+    }
+    func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}$"
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        let isValid = passwordTest.evaluate(with: password)
+        print("Password: \(password) - Valid: \(isValid)")
+        return isValid
     }
 }
