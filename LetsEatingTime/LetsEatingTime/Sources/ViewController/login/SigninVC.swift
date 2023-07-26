@@ -86,37 +86,31 @@ extension SigninVC {
         let idText = idTextField.text!
         let pwText = pwTextField.text!
         print("\(idText), \(pwText)")
-        AF.request("\(api)/api/account/login.do",
-                   method: .post,
-                   parameters: [
-                    "id": idText,
-                    "password": pwText
-                   ],
-                   encoding: JSONEncoding.default,
-                   headers: ["Content-Type": "application/json"]
-        )
-        .validate()
-        .responseDecodable(of: Token.self) { response in
-            switch response.result {
-            case.success(let value):
-                do {
-                    TokenManager.save(.grantType, value.data.grantType!)
-                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
-                    TokenManager.save(.refreshToken, value.data.refreshToken!)
-                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
-                    TokenManager.save(.accessToken, value.data.accessToken!)
-                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
+//        AF.request("\(api)/account/login.do",
+//                   method: .post,
+//                   parameters: [
+//                    "id": idText,
+//                    "password": pwText
+//                   ],
+//                   encoding: JSONEncoding.default,
+//                   headers: ["Content-Type": "application/json"]
+//        )
+//        .validate()
+//        .responseDecodable(of: Token.self) { response in
+//            switch response.result {
+//            case.success(let value):
+//                    TokenManager.save(.grantType, value.data.grantType)
+//                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
+//                    TokenManager.save(.refreshToken, value.data.refreshToken)
+//                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
+//                    TokenManager.save(.accessToken, value.data.accessToken)
+//                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
                     self.present()
-                }
-            case.failure(let error):
-                if error != nil {
-                    print("입력한 정보를 확인해주세요")
-                } else {
-//                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
-                    print(error.localizedDescription)
-                }
-            }
-        }
+//            case.failure(let error):
+////                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
+//                    print(error.localizedDescription)
+//                }
+//        }
     }
     @objc func didPressGoTosignupButton() {
         let viewController = SignupVC()
