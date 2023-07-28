@@ -81,17 +81,25 @@ extension StudentIdCardVC {
 //MARK: - SetupUI
 extension StudentIdCardVC {
     func setup() {
-        scrollView.contentSize = CGSize(width: view.bounds.width, height: 1000)
+        view.addSubview(scrollView)
+    scrollView.snp.makeConstraints {
+        $0.edges.equalToSuperview()
+    }
         contentView.backgroundColor = .clear
-        contentView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 1000))
-        scrollView.addSubview(contentView)
-        contentView.addSubview(studentIdCardView)
-        studentIdCardView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(329)
-            $0.height.equalTo(488)
-        }
+            contentView = UIView()
+            scrollView.addSubview(contentView)
+            contentView.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+                $0.width.equalTo(view.bounds.width)
+                $0.height.equalTo(1000)
+            }
+            contentView.addSubview(studentIdCardView)
+            studentIdCardView.snp.makeConstraints {
+                $0.top.equalToSuperview().offset(20)
+                $0.centerX.equalToSuperview()
+                $0.width.equalTo(329)
+                $0.height.equalTo(488)
+            }
         [
             mealsView,
             mealsButton,
@@ -112,17 +120,17 @@ extension StudentIdCardVC {
             $0.bottom.equalTo(mealsButton.snp.top).offset(120)
         }
         withdrawalButton.snp.makeConstraints {
-            $0.top.equalTo(logoutButton.snp.bottom).offset(20)
+            $0.top.equalTo(withdrawalButton.snp.bottom).offset(20)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(withdrawalButton.snp.top).offset(50)
         }
-        logoutButton.snp.makeConstraints {
-            $0.top.equalTo(mealsStatusView.snp.bottom).offset(20)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(logoutButton.snp.top).offset(50)
-        }
+//        logoutButton.snp.makeConstraints {
+//            $0.top.equalTo(mealsStatusView.snp.bottom).offset(20)
+//            $0.left.equalToSuperview().offset(20)
+//            $0.right.equalToSuperview().offset(-20)
+//            $0.bottom.equalTo(logoutButton.snp.top).offset(50)
+//        }
         mealsStatusView.snp.makeConstraints {
             $0.top.equalTo(mealsView.snp.bottom).offset(30)
             $0.left.equalToSuperview().offset(20)
@@ -135,13 +143,6 @@ extension StudentIdCardVC {
             $0.left.equalToSuperview()
             $0.right.equalToSuperview()
             $0.bottom.equalToSuperview()
-        }
-        [
-            scrollView
-        ].forEach {
-            self.view.addSubview($0) }
-        scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
         }
     }
 }
