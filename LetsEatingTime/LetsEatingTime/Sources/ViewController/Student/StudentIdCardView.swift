@@ -53,20 +53,19 @@ class StudentIdCardView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    let parameter = [ "Token": TokenManager.get(.accessToken)! ]
+    let getGrantType = String(describing: TokenManager.get(.grantType)!)
+    let getAccecToken = String(describing: TokenManager.get(.accessToken)!)
     func getStudentInfomation() {
-        AF.request("\(api)/api/card/profile",
+        AF.request("\(api)/user/profile",
                    method: .get,
                    encoding: JSONEncoding.default,
-                   headers: ["Content-Type": "application/json"]
+                   headers: ["Authorization": "\(getGrantType) \(getGrantType)"]
         )
         .responseDecodable(of: StudentIdCard.self) { response in
             switch response.result {
             case .success(let value):
-                self.studentIdCardNameLabel.text = "\(value.studentName)"
-                self.studentIdCardGradeLabel.text = "\(value.studentGrade)학년 \(value.studentClass)반 \(value.studentNumber)번호"
+                print("\(value.data.user.grade)학년 \(value.data.user.className)반 \(value.data.user.classNo)번호")
             case.failure(let error):
-                showAlert(title: "경고⚠️ \(error._code)", message: "네트워크 연결을 확인해주세요.")
                 print("\(error.localizedDescription)")
             }
         }
@@ -116,5 +115,10 @@ class StudentIdCardView: UIView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(label.snp.bottom).offset(42)
         }
+    }
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
     }
 }
