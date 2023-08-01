@@ -217,6 +217,7 @@ extension SignupVC {
         let grade = Int(String(digitsOnly[digitsOnly.startIndex]))!
         let className = Int(String(digitsOnly[index1]))!
         let classNo = Int(String(digitsOnly[index2..<index3]))!
+        print("id \(idText), \npw \(pwText)")
         AF.request("\(api)/account/signup.do",
                    method: .post,
                    parameters: [
