@@ -102,40 +102,28 @@ extension StudentIdCardVC {
             }
         [
             mealsView,
+            mealsLabel,
             mealsButton,
+            mealsStatusView,
             logoutButton,
-            mealsStatusViews,
             withdrawalButton
         ].forEach { self.contentView.addSubview($0) }
         mealsView.snp.makeConstraints {
-            $0.top.equalTo(studentIdCardView.snp.bottom).offset(70)
+            $0.top.equalTo(studentIdCardView.snp.bottom).offset(20)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(mealsView.snp.top).offset(120)
         }
+        mealsLabel.snp.makeConstraints {
+            $0.centerY.equalTo(mealsView)
+            $0.left.equalTo(mealsView).offset(40)
+            $0.right.equalTo(mealsView).offset(-20)
+        }
         mealsButton.snp.makeConstraints {
-            $0.top.equalTo(studentIdCardView.snp.bottom).offset(70)
+            $0.top.equalTo(studentIdCardView.snp.bottom).offset(20)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(mealsButton.snp.top).offset(120)
-        }
-        withdrawalButton.snp.makeConstraints {
-            $0.top.equalTo(withdrawalButton.snp.bottom).offset(20)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(withdrawalButton.snp.top).offset(50)
-        }
-//        logoutButton.snp.makeConstraints {
-//            $0.top.equalTo(mealsStatusView.snp.bottom).offset(20)
-//            $0.left.equalToSuperview().offset(20)
-//            $0.right.equalToSuperview().offset(-20)
-//            $0.bottom.equalTo(logoutButton.snp.top).offset(50)
-//        }
-        mealsStatusView.snp.makeConstraints {
-            $0.top.equalTo(mealsView.snp.bottom).offset(30)
-            $0.left.equalToSuperview().offset(20)
-            $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(mealsStatusView.snp.top).offset(200)
         }
         mealsStatusView.addSubview(mealsStatusViews)
         mealsStatusViews.snp.makeConstraints {
