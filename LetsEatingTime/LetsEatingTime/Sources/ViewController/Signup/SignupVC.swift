@@ -242,6 +242,12 @@ extension SignupVC {
             }
         }
     }
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true)
+    }
     func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}$"
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
