@@ -14,7 +14,7 @@ import CoreNFC
 class StudentIdCardVC: UIViewController {
     let scrollView = UIScrollView()
     var contentView = UIView()
-    let mealsStatusViews = UIView()
+    let mealsStatusViews = MealsStatusView()
     let studentIdCardView = StudentIdCardView().then {
         $0.layer.masksToBounds = false
         $0.backgroundColor = .white
@@ -116,11 +116,17 @@ extension StudentIdCardVC {
         }
         mealsLabel.snp.makeConstraints {
             $0.centerY.equalTo(mealsView)
-            $0.left.equalTo(mealsView).offset(40)
+            $0.left.equalTo(mealsView).offset(70)
             $0.right.equalTo(mealsView).offset(-20)
         }
         mealsButton.snp.makeConstraints {
             $0.top.equalTo(studentIdCardView.snp.bottom).offset(20)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(mealsButton.snp.top).offset(120)
+        }
+        mealsStatusView.snp.makeConstraints {
+            $0.top.equalTo(mealsView.snp.bottom).offset(20)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(mealsButton.snp.top).offset(120)
