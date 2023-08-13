@@ -13,6 +13,7 @@ import JWTDecode
 import SwiftKeychainWrapper
 
 class SigninVC: UIViewController {
+    
     let logoImage = UILabel().then {
         //        $0.image = (UIImage(named: ""))
         $0.text = "레츠이팅타임"
@@ -26,8 +27,8 @@ class SigninVC: UIViewController {
         $0.backgroundColor = UIColor(named: "SecondColor")
         $0.leftViewMode = .always
         $0.rightViewMode = .always
-        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
-        $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
+        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
+        $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
         $0.layer.cornerRadius = 20
     }
     let pwTextField = UITextField().then {
@@ -38,8 +39,8 @@ class SigninVC: UIViewController {
         $0.backgroundColor = UIColor(named: "SecondColor")
         $0.leftViewMode = .always
         $0.rightViewMode = .always
-        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
-        $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 0.0))
+        $0.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
+        $0.rightView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
         $0.layer.cornerRadius = 20
     }
     let signinButton = UIButton().then {
@@ -47,12 +48,6 @@ class SigninVC: UIViewController {
         $0.setTitle("로그인", for: .normal)
         $0.layer.cornerRadius = 20
         $0.addTarget(self, action: #selector(didPressSigninBt), for: .touchUpInside)
-    }
-    let signupButton = UIButton().then {
-        $0.backgroundColor = UIColor(named: "MainColor")
-        $0.setTitle("회원가입", for: .normal)
-        $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(didPressGoTosignupButton), for: .touchUpInside)
     }
     let eatingFoodImage = UIImageView().then {
         $0.image = UIImage(named: "EatingFoodImage")
@@ -62,6 +57,30 @@ class SigninVC: UIViewController {
     lazy var refreshCheckBoxButton = UIButton(type: .system).then {
         $0.setImage(uncheckedImage, for: .normal)
         $0.addTarget(self, action: #selector(checkBoxTapped(_:)), for: .touchUpInside)
+    }
+    let findID = UIButton().then {
+        $0.setTitle("아이디 찾기", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(didTabfindID), for: .touchUpInside)
+    }
+    let findView = UIView().then {
+        $0.backgroundColor = .black
+    }
+    let findPW = UIButton().then {
+        $0.setTitleColor(.black, for: .normal)
+        $0.setTitle("비밀번호 찾기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(didTabfindPW), for: .touchUpInside)
+    }
+    let findView2 = UIView().then {
+        $0.backgroundColor = .black
+    }
+    let signupButton = UIButton().then {
+        $0.setTitle("회원가입", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        $0.addTarget(self, action: #selector(didPressGoTosignupButton), for: .touchUpInside)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +93,12 @@ class SigninVC: UIViewController {
     }
 }
 extension SigninVC {
+    @objc func didTabfindID() {
+//        showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
+    }
+    @objc func didTabfindPW() {
+//        showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
+    }
     @objc func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
         if sender.isSelected {
@@ -86,31 +111,31 @@ extension SigninVC {
         let idText = idTextField.text!
         let pwText = pwTextField.text!
         print("\(idText), \(pwText)")
-//        AF.request("\(api)/account/login.do",
-//                   method: .post,
-//                   parameters: [
-//                    "id": idText,
-//                    "password": pwText
-//                   ],
-//                   encoding: JSONEncoding.default,
-//                   headers: ["Content-Type": "application/json"]
-//        )
-//        .validate()
-//        .responseDecodable(of: Token.self) { response in
-//            switch response.result {
-//            case.success(let value):
-//                    TokenManager.save(.grantType, value.data.grantType)
-//                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)))")
-//                    TokenManager.save(.refreshToken, value.data.refreshToken)
-//                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)))")
-//                    TokenManager.save(.accessToken, value.data.accessToken)
-//                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)))")
+        AF.request("\(api)/account/login.do",
+                   method: .post,
+                   parameters: [
+                    "id": /*idText*/"tank6974",
+                    "password": /*pwText*/"bksa2354!@"
+                   ],
+                   encoding: JSONEncoding.default,
+                   headers: ["Content-Type": "application/json"]
+        )
+        .validate()
+        .responseDecodable(of: Token.self) { response in
+            switch response.result {
+            case.success(let value):
+                    TokenManager.save(.grantType, value.data.grantType)
+                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)!))")
+                    TokenManager.save(.refreshToken, value.data.refreshToken)
+                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)!))")
+                    TokenManager.save(.accessToken, value.data.accessToken)
+                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)!))")
                     self.present()
-//            case.failure(let error):
-////                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
-//                    print(error.localizedDescription)
-//                }
-//        }
+            case.failure(let error):
+//                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
+                    print(error.localizedDescription)
+                }
+        }
     }
     @objc func didPressGoTosignupButton() {
         let viewController = SignupVC()
@@ -124,9 +149,12 @@ extension SigninVC {
             logoImage,
             idTextField,
             pwTextField,
-            signupButton,
             signinButton,
-            refreshCheckBoxButton
+            findID,
+            findView,
+            findPW,
+            findView2,
+            signupButton,
         ].forEach { self.view.addSubview($0) }
         logoImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(200)
@@ -151,17 +179,35 @@ extension SigninVC {
             $0.left.equalToSuperview().offset(70)
             $0.right.equalToSuperview().offset(-70)
         }
-        signupButton.snp.makeConstraints {
-            $0.top.equalTo(signinButton.snp.bottom).offset(10)
-            $0.bottom.equalTo(signupButton.snp.top).offset(50)
-            $0.left.equalToSuperview().offset(70)
-            $0.right.equalToSuperview().offset(-70)
-        }
         eatingFoodImage.snp.makeConstraints {
             $0.top.equalTo(eatingFoodImage.snp.bottom).offset(-367)
             $0.bottom.equalToSuperview().offset(47)
             $0.left.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(20)
+        }
+        findID.snp.makeConstraints {
+            $0.right.equalTo(findPW.snp.left).offset(-20)
+            $0.top.equalTo(signinButton.snp.bottom).offset(20)
+        }
+        findView.snp.makeConstraints {
+            $0.top.equalTo(signinButton.snp.bottom).offset(22)
+            $0.left.equalTo(findPW.snp.left).offset(-10)
+            $0.width.equalTo(1)
+            $0.height.equalTo(20)
+        }
+        findPW.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(signinButton.snp.bottom).offset(20)
+        }
+        findView2.snp.makeConstraints {
+            $0.top.equalTo(signinButton.snp.bottom).offset(22)
+            $0.left.equalTo(findPW.snp.right).offset(10)
+            $0.width.equalTo(1)
+            $0.height.equalTo(20)
+        }
+        signupButton.snp.makeConstraints {
+            $0.left.equalTo(findPW.snp.right).offset(20)
+            $0.top.equalTo(signinButton.snp.bottom).offset(20)
         }
         //        refreshCheckBoxButton.snp.makeConstraints {
         //            $0.top.equalTo(eatingFoodImage.snp.bottom).offset(-367)
@@ -177,16 +223,17 @@ extension SigninVC {
     }
     
 //    func chackToken() {
-//                AF.request("\(api)/api/account/login.do",
+//                AF.request("\(api)/account/login.do",
 //                   method: .post,
-//                   headers: ["Authorization": "\(String(describing: TokenManager.get(.grantType)!)) \(String(describing: TokenManager.get(.accessToken)!))"]
+//                   headers: ["Authorization": "\(TokenManager.get(.grantType)!) \(TokenManager.get(.accessToken)!)"]
 //        )
 //        .validate()
 //        .responseDecodable(of: Token.self) { response in
 //            switch response.result {
 //            case.success(let value):
-//                TokenManager.save(.accessToken, value.data.accessToken!)
-//                TokenManager.save(.refreshToken, value.data.refreshToken!)
+//                print("\(value.data.accessToken)\(value.data.refreshToken)")
+//                TokenManager.save(.accessToken, value.data.accessToken)
+//                TokenManager.save(.refreshToken, value.data.refreshToken)
 //                self.present()
 //            case .failure(let error):
 //                print("로그인 다시하셈 ㅅㄱ\(error._code) \(error.localizedDescription)")
