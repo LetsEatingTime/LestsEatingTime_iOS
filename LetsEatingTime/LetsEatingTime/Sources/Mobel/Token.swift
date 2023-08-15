@@ -27,13 +27,12 @@ class TokenManager {
     static func save(_ tokenType: TokenType, _ value: String) {
         UserDefaults.standard.set(value, forKey: String(describing: tokenType))
     }
+    
     static func get(_ tokenType: TokenType) -> String? {
         return UserDefaults.standard.string(forKey: String(describing: tokenType))
     }
+    
         static func remove(_ tokenType: TokenType) {
         UserDefaults.standard.removeObject(forKey: String(describing: tokenType))
     }
-
-//    Token.save(.accessToken, data.accessToken)
-//    Token.save(.refreshToken, data.refreshToken)
 }
