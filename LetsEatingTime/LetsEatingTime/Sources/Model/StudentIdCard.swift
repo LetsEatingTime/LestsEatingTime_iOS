@@ -9,11 +9,11 @@ import Foundation
 
 struct StudentIdCard: Codable {
     let status: Int
-    let data: Datas
+    let data: UserDataDetail
 }
-struct Datas: Codable {
+struct UserDataDetail: Codable {
     let user: User
-    let mealTime: [String]
+    let mealTime: [String]?
 }
 
 struct User: Codable {
@@ -21,7 +21,7 @@ struct User: Codable {
     let image: String?
     let id: String
     let name: String
-    let createTime: String
+    let createTime: Date
     let userType: String
     let grade: Int
     let className: Int
