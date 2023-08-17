@@ -15,7 +15,7 @@ class SignupNameVC: UIViewController {
         $0.font = .systemFont(ofSize: 30.0, weight: .bold)
     }
     let nameTextField = UITextField().then {
-        $0.placeholder = "이름를 입력해주세요"
+        $0.placeholder = "이름을 입력해주세요"
         $0.font = .systemFont(ofSize: 14.0, weight: .medium)
         $0.autocapitalizationType = .none
         $0.backgroundColor = .clear
