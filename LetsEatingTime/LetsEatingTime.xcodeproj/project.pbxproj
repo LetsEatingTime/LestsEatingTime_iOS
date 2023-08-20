@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85000DF629FDA646009B77D5 /* SwiftJWT in Frameworks */ = {isa = PBXBuildFile; productRef = 85000DF529FDA646009B77D5 /* SwiftJWT */; };
-		85000DFC2A070ED4009B77D5 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 85000DFB2A070ED4009B77D5 /* JWTDecode */; };
 		850960E929DE9F6000B16E87 /* MealsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850960E829DE9F6000B16E87 /* MealsData.swift */; };
 		8534DC772A0B479000699166 /*  showAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8534DC762A0B479000699166 /*  showAlert.swift */; };
 		8541418C29C9A6C50063DF27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8541418B29C9A6C50063DF27 /* AppDelegate.swift */; };
@@ -33,10 +31,10 @@
 		858A5B4529EE675D009ACE57 /* SignupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858A5B4429EE675D009ACE57 /* SignupData.swift */; };
 		85963EEA29D5D65A0068EC3E /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85963EE929D5D65A0068EC3E /* LoginData.swift */; };
 		859741D22A8DA9FC0069EAD6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859741D12A8DA9FC0069EAD6 /* Error.swift */; };
+		859741D42A8EF7AA0069EAD6 /* Internal DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859741D32A8EF7AA0069EAD6 /* Internal DB.swift */; };
 		85BEC5A229D558F200B9948E /* StudentIdCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BEC5A129D558F200B9948E /* StudentIdCardView.swift */; };
 		85CB7E4A29E7F0B60078F2AB /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CB7E4929E7F0B60078F2AB /* Token.swift */; };
 		85CD64372A6437870003A357 /* MealStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD64362A6437870003A357 /* MealStatusView.swift */; };
-		85DA8DC229F7A1A5008D9BC7 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 85DA8DC129F7A1A5008D9BC7 /* SwiftKeychainWrapper */; };
 		85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E292CF29D3D45B0054E012 /* StudentShowMealsView.swift */; };
 		85E3B93329F48FE000B2D2F3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 85E3B93229F48FE000B2D2F3 /* Realm */; };
 		85E3B93529F48FE000B2D2F3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 85E3B93429F48FE000B2D2F3 /* RealmSwift */; };
@@ -68,6 +66,7 @@
 		858A5B4429EE675D009ACE57 /* SignupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupData.swift; sourceTree = "<group>"; };
 		85963EE929D5D65A0068EC3E /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
 		859741D12A8DA9FC0069EAD6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		859741D32A8EF7AA0069EAD6 /* Internal DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Internal DB.swift"; sourceTree = "<group>"; };
 		85BEC5A129D558F200B9948E /* StudentIdCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdCardView.swift; sourceTree = "<group>"; };
 		85CB7E4929E7F0B60078F2AB /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		85CD64362A6437870003A357 /* MealStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealStatusView.swift; sourceTree = "<group>"; };
@@ -81,12 +80,9 @@
 			files = (
 				8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */,
 				854141A729C9A8F70063DF27 /* SnapKit in Frameworks */,
-				85000DFC2A070ED4009B77D5 /* JWTDecode in Frameworks */,
 				85E3B93329F48FE000B2D2F3 /* Realm in Frameworks */,
 				85E3B93529F48FE000B2D2F3 /* RealmSwift in Frameworks */,
 				854141A129C9A8D40063DF27 /* Then in Frameworks */,
-				85000DF629FDA646009B77D5 /* SwiftJWT in Frameworks */,
-				85DA8DC229F7A1A5008D9BC7 /* SwiftKeychainWrapper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				8534DC762A0B479000699166 /*  showAlert.swift */,
+				85CB7E4929E7F0B60078F2AB /* Token.swift */,
+				859741D32A8EF7AA0069EAD6 /* Internal DB.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -208,7 +206,6 @@
 				856C897C2A5126810054FE61 /* StudentIdCard.swift */,
 				85963EE929D5D65A0068EC3E /* LoginData.swift */,
 				850960E829DE9F6000B16E87 /* MealsData.swift */,
-				85CB7E4929E7F0B60078F2AB /* Token.swift */,
 				858A5B4429EE675D009ACE57 /* SignupData.swift */,
 				855F0AA02A85D1200007EFB8 /* MealsStatusData.swift */,
 				859741D12A8DA9FC0069EAD6 /* Error.swift */,
@@ -239,9 +236,6 @@
 				8588874B29CABCDD00D0CDAA /* Alamofire */,
 				85E3B93229F48FE000B2D2F3 /* Realm */,
 				85E3B93429F48FE000B2D2F3 /* RealmSwift */,
-				85DA8DC129F7A1A5008D9BC7 /* SwiftKeychainWrapper */,
-				85000DF529FDA646009B77D5 /* SwiftJWT */,
-				85000DFB2A070ED4009B77D5 /* JWTDecode */,
 			);
 			productName = LetsEatingTime;
 			productReference = 8541418829C9A6C50063DF27 /* LetsEatingTime.app */;
@@ -276,9 +270,6 @@
 				854141A529C9A8F70063DF27 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				8588874A29CABCDD00D0CDAA /* XCRemoteSwiftPackageReference "Alamofire" */,
 				85E3B93129F48FE000B2D2F3 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				85DA8DC029F7A1A5008D9BC7 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
-				85000DF429FDA646009B77D5 /* XCRemoteSwiftPackageReference "Swift-JWT" */,
-				85000DFA2A070ED4009B77D5 /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = 8541418929C9A6C50063DF27 /* Products */;
 			projectDirPath = "";
@@ -347,6 +338,7 @@
 				8541418E29C9A6C50063DF27 /* SceneDelegate.swift in Sources */,
 				85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */,
 				856C897D2A5126810054FE61 /* StudentIdCard.swift in Sources */,
+				859741D42A8EF7AA0069EAD6 /* Internal DB.swift in Sources */,
 				85482A2529CC4B0D00F79893 /* SignupPWVC.swift in Sources */,
 				8588874629CAA53100D0CDAA /* StudentIDCardVC.swift in Sources */,
 				85963EEA29D5D65A0068EC3E /* LoginData.swift in Sources */,
@@ -561,22 +553,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		85000DF429FDA646009B77D5 /* XCRemoteSwiftPackageReference "Swift-JWT" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Kitura/Swift-JWT.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-		85000DFA2A070ED4009B77D5 /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		8541419F29C9A8D40063DF27 /* XCRemoteSwiftPackageReference "Then" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/Then.git";
@@ -601,14 +577,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		85DA8DC029F7A1A5008D9BC7 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
 		85E3B93129F48FE000B2D2F3 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -620,16 +588,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		85000DF529FDA646009B77D5 /* SwiftJWT */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 85000DF429FDA646009B77D5 /* XCRemoteSwiftPackageReference "Swift-JWT" */;
-			productName = SwiftJWT;
-		};
-		85000DFB2A070ED4009B77D5 /* JWTDecode */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 85000DFA2A070ED4009B77D5 /* XCRemoteSwiftPackageReference "JWTDecode" */;
-			productName = JWTDecode;
-		};
 		854141A029C9A8D40063DF27 /* Then */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8541419F29C9A8D40063DF27 /* XCRemoteSwiftPackageReference "Then" */;
@@ -644,11 +602,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8588874A29CABCDD00D0CDAA /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		85DA8DC129F7A1A5008D9BC7 /* SwiftKeychainWrapper */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 85DA8DC029F7A1A5008D9BC7 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
-			productName = SwiftKeychainWrapper;
 		};
 		85E3B93229F48FE000B2D2F3 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
