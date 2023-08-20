@@ -8,7 +8,15 @@
 import Foundation
 
 struct MealsData: Codable {
-    let breakfast: String!
-    let lunch: String!
-    let dinner: String!
+    let status: Int?
+    let message: String?
+    let data: MealsDatas
+}
+
+struct MealsDatas: Codable {
+    let exists: Bool?
+    let date: String?
+    let breakfast: String?
+    let lunch: String?
+    let dinner: String?
 }
