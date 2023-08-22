@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
-import JWTDecode
-import SwiftKeychainWrapper
 
 class SigninVC: UIViewController {
     
@@ -58,11 +56,11 @@ class SigninVC: UIViewController {
         $0.setImage(uncheckedImage, for: .normal)
         $0.addTarget(self, action: #selector(checkBoxTapped(_:)), for: .touchUpInside)
     }
-    let findID = UIButton().then {
+    let findId = UIButton().then {
         $0.setTitle("아이디 찾기", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        $0.addTarget(self, action: #selector(didTabfindID), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didTabfindId), for: .touchUpInside)
     }
     let findView = UIView().then {
         $0.backgroundColor = .black
@@ -93,11 +91,11 @@ class SigninVC: UIViewController {
     }
 }
 extension SigninVC {
-    @objc func didTabfindID() {
-//        showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
+    @objc func didTabfindId() {
+        self.showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
     }
     @objc func didTabfindPW() {
-//        showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
+        self.showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
     }
     @objc func checkBoxTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
@@ -107,15 +105,20 @@ extension SigninVC {
             sender.setImage(uncheckedImage, for: .normal)
         }
     }
+    func enterTestData() {
+        idTextField.text = "tank6974"
+        pwTextField.text = "bksa2354!@"
+    }
     @objc func didPressSigninBt() {
+        enterTestData()
         let idText = idTextField.text!
         let pwText = pwTextField.text!
         print("\(idText), \(pwText)")
         AF.request("\(api)/account/login.do",
                    method: .post,
                    parameters: [
-                    "id": /*idText*/"tank6974",
-                    "password": /*pwText*/"bksa2354!@"
+                    "id": idText,
+                    "password": pwText
                    ],
                    encoding: JSONEncoding.default,
                    headers: ["Content-Type": "application/json"]
@@ -124,12 +127,10 @@ extension SigninVC {
         .responseDecodable(of: Token.self) { response in
             switch response.result {
             case.success(let value):
-                    TokenManager.save(.grantType, value.data.grantType)
-                    print("DB grantType: \(String(describing: TokenManager.get(.grantType)!))")
+                GetId.save(.id, idText)
+                TokenManager.save(.grantType, value.data.grantType)
                     TokenManager.save(.refreshToken, value.data.refreshToken)
-                    print("DB refreshToken: \(String(describing: TokenManager.get(.refreshToken)!))")
                     TokenManager.save(.accessToken, value.data.accessToken)
-                    print("DB accessToken: \(String(describing: TokenManager.get(.accessToken)!))")
                     self.present()
             case.failure(let error):
 //                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
@@ -141,6 +142,12 @@ extension SigninVC {
         let viewController = SignupVC()
         present(viewController, animated: true)
     }
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
+    }
 }
 extension SigninVC {
     func setup() {
@@ -150,11 +157,11 @@ extension SigninVC {
             idTextField,
             pwTextField,
             signinButton,
-            findID,
+            findId,
             findView,
             findPW,
             findView2,
-            signupButton,
+            signupButton
         ].forEach { self.view.addSubview($0) }
         logoImage.snp.makeConstraints {
             $0.top.equalToSuperview().offset(200)
@@ -185,7 +192,7 @@ extension SigninVC {
             $0.left.equalToSuperview().offset(0)
             $0.right.equalToSuperview().offset(20)
         }
-        findID.snp.makeConstraints {
+        findId.snp.makeConstraints {
             $0.right.equalTo(findPW.snp.left).offset(-20)
             $0.top.equalTo(signinButton.snp.bottom).offset(20)
         }
@@ -221,24 +228,24 @@ extension SigninVC {
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
-    
-//    func chackToken() {
-//                AF.request("\(api)/account/login.do",
-//                   method: .post,
-//                   headers: ["Authorization": "\(TokenManager.get(.grantType)!) \(TokenManager.get(.accessToken)!)"]
-//        )
-//        .validate()
-//        .responseDecodable(of: Token.self) { response in
-//            switch response.result {
-//            case.success(let value):
-//                print("\(value.data.accessToken)\(value.data.refreshToken)")
-//                TokenManager.save(.accessToken, value.data.accessToken)
-//                TokenManager.save(.refreshToken, value.data.refreshToken)
-//                self.present()
-//            case .failure(let error):
-//                print("로그인 다시하셈 ㅅㄱ\(error._code) \(error.localizedDescription)")
-//
-//            }
-//        }
-//    }
+
+    func chackToken() {
+                AF.request("\(api)/account/login.do",
+                   method: .post,
+                   headers: ["Authorization": "\(TokenManager.get(.grantType)!) \(TokenManager.get(.accessToken)!)"]
+        )
+        .validate()
+        .responseDecodable(of: Token.self) { response in
+            switch response.result {
+            case.success(let value):
+                print("\(value.data.accessToken)\(value.data.refreshToken)")
+                TokenManager.save(.accessToken, value.data.accessToken)
+                TokenManager.save(.refreshToken, value.data.refreshToken)
+                self.present()
+            case .failure(let error):
+                print("로그인 다시하셈 ㅅㄱ\(error._code) \(error.localizedDescription)")
+
+            }
+        }
+    }
 }
