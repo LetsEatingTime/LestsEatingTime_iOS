@@ -11,6 +11,7 @@ import SnapKit
 import Alamofire
 
 class StudentIdCardView: UIView {
+    
     let backgroundImage = UIImageView().then {
         $0.image = UIImage(named: "StudentIdCardBackgroundImage")
     }
@@ -19,6 +20,7 @@ class StudentIdCardView: UIView {
         $0.font = .systemFont(ofSize: 36, weight: .semibold)
         $0.textAlignment = .center
     }
+    
     let studentIdCardLabel = UILabel().then {
         $0.text = "Student ID Card"
         $0.font = .systemFont(ofSize: 12, weight: .semibold)
@@ -48,27 +50,9 @@ class StudentIdCardView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        getStudentInfomation()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    let getGrantType = String(describing: TokenManager.get(.grantType)!)
-    let getAccecToken = String(describing: TokenManager.get(.accessToken)!)
-    func getStudentInfomation() {
-        AF.request("\(api)/user/profile",
-                   method: .get,
-                   encoding: JSONEncoding.default,
-                   headers: ["Authorization": "\(getGrantType) \(getGrantType)"]
-        )
-        .responseDecodable(of: StudentIdCard.self) { response in
-            switch response.result {
-            case .success(let value):
-                print("\(value.data.user.grade)학년 \(value.data.user.className)반 \(value.data.user.classNo)번호")
-            case.failure(let error):
-                print("\(error.localizedDescription)")
-            }
-        }
     }
     func setup() {
         [
@@ -115,10 +99,5 @@ class StudentIdCardView: UIView {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(label.snp.bottom).offset(42)
         }
-    }
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okAction)
     }
 }
