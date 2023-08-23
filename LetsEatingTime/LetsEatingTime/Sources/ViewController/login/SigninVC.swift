@@ -106,8 +106,8 @@ extension SigninVC {
         }
     }
     func enterTestData() {
-        idTextField.text = "tank6974"
-        pwTextField.text = "bksa2354!@"
+        idTextField.text = "tank6210"
+        pwTextField.text = "bksa2354!@#$"
     }
     @objc func didPressSigninBt() {
         enterTestData()
