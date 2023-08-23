@@ -8,7 +8,7 @@
 import Foundation
 
 struct StudentIdCard: Codable {
-    let status: Int
+    let status: Int?
     let data: UserDataDetail
 }
 struct UserDataDetail: Codable {
@@ -17,16 +17,16 @@ struct UserDataDetail: Codable {
 }
 
 struct User: Codable {
-    let idx: Int
+    let idx: Int?
     let image: String?
-    let id: String
-    let name: String
-    let createTime: Date
-    let userType: String
-    let grade: Int
-    let className: Int
-    let classNo: Int
-    let approvedYn: String
-    let withdrawedYn: String
+    let id: String?
+    let name: String?
+    let createTime: Date?
+    let userType: String?
+    let grade: Int?
+    let className: Int?
+    let classNo: Int?
+    let approvedYn: String?
+    let withdrawedYn: String?
     let withdrawedTime: String?
 }
