@@ -148,7 +148,6 @@ extension SignupVC {
         addChild(idVC)
         self.uiView.addSubview(myIDView)
     }
-    func checkName() {}
     func setup() {
         [
             eatingFoodImage,
@@ -235,12 +234,6 @@ extension SignupVC {
                 self.showAlert(title: "경고⚠️", message: "네트워크 연결 상태를 확인해주세요! \n\(error.localizedDescription)")
             }
         }
-    }
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true)
     }
     func isValidId(_ id: String) -> Bool {
         let idRegex = "^[a-z0-9]*$"
