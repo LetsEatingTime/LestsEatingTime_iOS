@@ -142,12 +142,6 @@ extension SigninVC {
         let viewController = SignupVC()
         present(viewController, animated: true)
     }
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true)
-    }
 }
 extension SigninVC {
     func setup() {
