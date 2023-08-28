@@ -161,12 +161,6 @@ extension StudentIdCardVC {
             }
         }
     }
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
-    }
 }
 extension StudentIdCardVC {
     @objc func didPressMealsButton() {
