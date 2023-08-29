@@ -63,7 +63,7 @@ class SignupPWVC: UIViewController {
         exLabel.snp.makeConstraints {
             $0.top.equalTo(pwLabel.snp.bottom).offset(3)
             $0.left.equalToSuperview().offset(30)
-            $0.right.equalTo(exLabel.snp.left).offset(220.33)
+            $0.right.equalToSuperview()
         }
         pwTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(90)
