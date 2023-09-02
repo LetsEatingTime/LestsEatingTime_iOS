@@ -84,11 +84,33 @@ class StudentIdCardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getStudentInfomation()
-        getStudentMealsStatus()
+//        getStudentInfomation()
+//        getStudentMealsStatus()
+        getMeals() 
     }
 }
 extension StudentIdCardVC {
+    func getMeals() {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: currentDate)
+        let month = calendar.component(.month, from: currentDate)
+        let day = calendar.component(.day, from: currentDate)
+        let url = "https://dodam.b1nd.com/api/meal?year=\(year)&month=\(month)&day=\(day)"
+        AF.request(url, method: .get)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case.success(let value):
+                    let decoder = JSONDecoder()
+                    if let decodedData = try? decoder.decode(MealsData.self, from: value).data {
+                        self.mealsLabel.text = decodedData.dinner
+                    }
+                case.failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
     func getStudentMealsStatus() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -106,7 +128,7 @@ extension StudentIdCardVC {
                 let decoder = JSONDecoder()
                 if let decodedData = try? decoder.decode(MealsStatusData.self, from: value).data {
                     decodedData.forEach { data in
-                        print("getStudentMealsStatus\nsuccess")
+                        print("getStudentMealsStatus: success")
                         switch data.info {
                         case "breakfast":
                             self.mealsStatusViews.breakfastCKView.backgroundColor = UIColor(named: "Succes")
