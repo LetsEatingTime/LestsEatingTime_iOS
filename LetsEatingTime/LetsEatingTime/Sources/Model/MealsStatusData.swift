@@ -18,5 +18,5 @@ struct Datas: Decodable {
     let entryTime: Date?
     let status: String
     let type: String
-    let info: String
+    let info: String?
 }
