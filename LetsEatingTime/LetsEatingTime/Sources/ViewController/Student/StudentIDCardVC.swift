@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 import Then
 import Alamofire
-import CoreNFC
 
 class StudentIdCardVC: UIViewController {
     
@@ -84,16 +83,40 @@ class StudentIdCardVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getStudentInfomation()
-        getStudentMealsStatus()
+                getStudentInfomation()
+                getStudentMealsStatus()
+        getMeals()
     }
 }
+
 extension StudentIdCardVC {
+    func getMeals() {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: currentDate)
+        let month = calendar.component(.month, from: currentDate)
+        let day = calendar.component(.day, from: currentDate)
+        let url = "https://dodam.b1nd.com/api/meal?year=\(year)&month=\(month)&day=\(day)"
+        AF.request(url, method: .get)
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case.success(let value):
+                    let decoder = JSONDecoder()
+                    if let decodedData = try? decoder.decode(MealsData.self, from: value).data {
+                        self.mealsLabel.text = decodedData.dinner
+                    }
+                case.failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+    }
     func getStudentMealsStatus() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let currentDate = dateFormatter.string(from: Date())
         let id = GetId.get(.id)!
+        
         AF.request("\(api)/user/meal-entry?id=\(id)&date=\(currentDate)",
                    method: .get,
                    encoding: JSONEncoding.default,
@@ -106,14 +129,14 @@ extension StudentIdCardVC {
                 let decoder = JSONDecoder()
                 if let decodedData = try? decoder.decode(MealsStatusData.self, from: value).data {
                     decodedData.forEach { data in
-                        print("getStudentMealsStatus\nsuccess")
+                        print("getStudentMealsStatus: success")
                         switch data.info {
                         case "breakfast":
-                            self.mealsStatusViews.breakfastCKView.backgroundColor = UIColor(named: "Succes")
+                            self.mealsStatusViews.breakfastCKView.backgroundColor = UIColor(named: "MainColor")
                         case "lunch":
-                            self.mealsStatusViews.lunchCKView.backgroundColor = UIColor(named: "Succes")
+                            self.mealsStatusViews.lunchCKView.backgroundColor = UIColor(named: "MainColor")
                         case "dinner":
-                            self.mealsStatusViews.dinnerCKView.backgroundColor = UIColor(named: "Succes")
+                            self.mealsStatusViews.dinnerCKView.backgroundColor = UIColor(named: "Failure")
                         default:
                             self.showAlert(title: "에잉..❓", message: "먹은 급식이 없어요😢")
                         }
@@ -121,8 +144,8 @@ extension StudentIdCardVC {
                 } else {
                     self.showAlert(title: "경고⚠️", message: "예상치 못한 오류😢 오류가 지속되면 최시훈에게 찾아오세요")
                     if let data = response.data {
-                                        print(String(decoding: data, as: UTF8.self))
-                                    }
+                        print(String(decoding: data, as: UTF8.self))
+                    }
                 }
             case.failure(_):
                 print("error")
@@ -141,33 +164,20 @@ extension StudentIdCardVC {
                    headers: ["Authorization": "\(grantType) \(accessToken)"]
         )
         .validate()
-        .responseData { response in
+        .responseDecodable(of: StudentIdCardData.self) { response in
             switch response.result {
             case .success(let value):
-                let decoder = JSONDecoder()
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss'+09:00'"
-                decoder.dateDecodingStrategy = .formatted(dateFormatter)
-                if let decodedData = try? decoder.decode(StudentIdCard.self, from: value).data {
-                    print("success")
-                    self.studentIdCardView.studentIdCardNameLabel.text = "\(decodedData.user.name!)"
-                    self.studentIdCardView.studentIdCardGradeLabel.text = "\(decodedData.user.grade!)학년 \(decodedData.user.className!)반 \(decodedData.user.classNo!)번호"
-                } else {
-                    print("decodingerror")
-                }
+                print("success")
+                self.studentIdCardView.studentIdCardNameLabel.text = "\(value.data.user.id!)"
+                self.studentIdCardView.studentIdCardGradeLabel.text = "\(value.data.user.grade!)학년 \(value.data.user.className!)반 \(value.data.user.classNo!)번호"
             case .failure(let error):
                 self.showAlert(title: "경고⚠️", message: "\(String(describing: error.errorDescription))")
                 print("error")
             }
         }
     }
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
-    }
 }
+
 extension StudentIdCardVC {
     @objc func didPressMealsButton() {
         let VC = StudentShowMealsVC()
@@ -183,20 +193,7 @@ extension StudentIdCardVC {
         TokenManager.remove(.accessToken)
     }
     @objc func didPressWithdrawalButton() {
-        AF.request("\(api)/account/login.do",
-                   method: .post,
-                   encoding: JSONEncoding.default,
-                   headers: ["Authorization": "\(grantType) \(accessToken)"]
-        )
-        .validate()
-        .responseDecodable(of: Token.self) { response in
-            switch response.result {
-            case.success:
-                self.dismiss(animated: true)
-            case.failure(let error):
-                self.showAlert(title: "실패⛔️", message: "회원탈퇴가 실패했어요👉👈\n\(error.localizedDescription)")
-            }
-        }
+        self.showAlert(title: "실패⛔️", message: "회원탈퇴가 실패했어요👉👈")
     }
 }
 //MARK: - SetupUI
@@ -271,9 +268,9 @@ extension StudentIdCardVC {
             $0.right.equalToSuperview().offset(-20)
             $0.bottom.equalTo(withdrawalButton.snp.top).offset(50)
         }
-//        mealsStatusViews.addSubview(mealsStatusView)
-//        mealsStatusView.snp.makeConstraints {
-//            $0.edges.equalToSuperview()
-//        }
+        //        mealsStatusViews.addSubview(mealsStatusView)
+        //        mealsStatusView.snp.makeConstraints {
+        //            $0.edges.equalToSuperview()
+        //        }
     }
 }
