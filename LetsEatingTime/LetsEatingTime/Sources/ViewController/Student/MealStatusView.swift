@@ -11,12 +11,12 @@ import SnapKit
 import Alamofire
 
 class MealsStatusView: UIView {
-    
     let mealsExplanationLabel = UILabel().then {
         $0.text = "나의 급식 현황"
         $0.font = .systemFont(ofSize: 15, weight: .medium)
         $0.textAlignment = .center
     }
+    
     let mealsDate = UILabel().then {
         let currentDate = Date()
         let calendar = Calendar.current
@@ -27,13 +27,16 @@ class MealsStatusView: UIView {
         $0.font = .systemFont(ofSize: 15, weight: .medium)
         $0.textAlignment = .center
     }
+    
     let breakfast = UILabel().then {
         $0.text = "아침"
         $0.font = .systemFont(ofSize: 15, weight: .medium)
     }
+    
     let breakfastImage = UIImageView().then {
         $0.image = UIImage(named: "Breakfast")
     }
+    
     let breakfastCKView = UIView().then {
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 5
@@ -44,20 +47,25 @@ class MealsStatusView: UIView {
         $0.font = .systemFont(ofSize: 15, weight: .medium)
 
     }
+    
     let lunchImage = UIImageView().then {
         $0.image = UIImage(named: "Lunch")
     }
+    
     let lunchCKView = UIView().then {
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 5
     }
+    
     let dinner = UILabel().then {
         $0.text = "저녁"
         $0.font = .systemFont(ofSize: 15, weight: .medium)
     }
+    
     let dinnerImage = UIImageView().then {
         $0.image = UIImage(named: "Dinner")
     }
+    
     let dinnerCKView = UIView().then {
         $0.backgroundColor = .lightGray
         $0.layer.cornerRadius = 5

@@ -13,7 +13,7 @@ import Alamofire
 class SignupVC: UIViewController {
     
     let logo = UILabel().then {
-        $0.text = "asdf"
+        $0.text = "Let's Eating Time"
         $0.font = .systemFont(ofSize: 100)
         $0.textAlignment = .center
     }
@@ -100,6 +100,7 @@ extension SignupVC {
             showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요")
         }
     }
+    
     @objc func didPressSignupNextButton() {
         print("didPressSignupNextButton")
         switch children.first {
@@ -144,10 +145,12 @@ extension SignupVC {
             showAlert(title: "경고⚠️", message: "예기치 못한 오류 앱을 다시 실행해주세요")
         }
     }
+    
     func configureUIView() {
         addChild(idVC)
         self.uiView.addSubview(myIDView)
     }
+    
     func setup() {
         [
             eatingFoodImage,
@@ -195,6 +198,7 @@ extension SignupVC {
         }
     }
 }
+
 extension SignupVC {
     func contactToServer() {
         let idText = idVC.idTextField.text!
@@ -229,12 +233,13 @@ extension SignupVC {
             case.success:
                 self.dismiss(animated: true)
                 self.showAlert(title: "성공!", message: "로그인을 완료해주세요.")
-
             case.failure(let error):
-                self.showAlert(title: "경고⚠️", message: "네트워크 연결 상태를 확인해주세요! \n\(error.localizedDescription)")
+                print(error.localizedDescription)
+                self.showAlert(title: "경고⚠️", message: "서버에 이상이 생겼습니다! \n관리자에게 문의해주세요.")
             }
         }
     }
+    
     func isValidId(_ id: String) -> Bool {
         let idRegex = "^[a-z0-9]*$"
         let idTest = NSPredicate(format: "SELF MATCHES %@", idRegex)
@@ -242,6 +247,7 @@ extension SignupVC {
         print("id: \(id) - Valid: \(isValid)")
         return isValid
     }
+    
     func isValidPassword(_ password: String) -> Bool {
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*\\W)[A-Za-z\\d\\W]{8,}$"
         let passwordTest = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
@@ -249,13 +255,13 @@ extension SignupVC {
         print("Password: \(password) - Valid: \(isValid)")
         return isValid
     }
+    
     func studentNumber() {
         let inputString = studentNumberVC.studentNumberTextField.text!
         if inputString.count == 4 {
             contactToServer()
         } else {
             self.showAlert(title: "경고⚠️", message: "학번은 4자리여야 합니다.")
-            
         }
     }
 }

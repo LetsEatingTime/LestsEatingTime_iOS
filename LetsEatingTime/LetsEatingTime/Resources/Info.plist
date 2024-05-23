@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string></string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -12,8 +12,6 @@
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>Appearance</key>
-		<string>Light</string>
-		<key>UIUserInterfaceStyle</key>
 		<string>Light</string>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
@@ -29,6 +27,8 @@
 				</dict>
 			</array>
 		</dict>
+		<key>UIUserInterfaceStyle</key>
+		<string>Light</string>
 	</dict>
 </dict>
 </plist>

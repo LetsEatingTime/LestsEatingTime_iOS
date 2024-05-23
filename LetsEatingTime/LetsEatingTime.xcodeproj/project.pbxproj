@@ -17,7 +17,6 @@
 		854141A729C9A8F70063DF27 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 854141A629C9A8F70063DF27 /* SnapKit */; };
 		854141AD29C9AE2B0063DF27 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854141AC29C9AE2B0063DF27 /* SignupVC.swift */; };
 		854141B029C9AEA00063DF27 /* DataBase.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 854141AE29C9AEA00063DF27 /* DataBase.xcdatamodeld */; };
-		854141B629CA83740063DF27 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854141B529CA83740063DF27 /* API.swift */; };
 		85482A2129CC4AA700F79893 /* SignupNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2029CC4AA700F79893 /* SignupNameVC.swift */; };
 		85482A2329CC4AFD00F79893 /* SignupIdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2229CC4AFD00F79893 /* SignupIdVC.swift */; };
 		85482A2529CC4B0D00F79893 /* SignupPwVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85482A2429CC4B0D00F79893 /* SignupPwVC.swift */; };
@@ -25,12 +24,13 @@
 		855F0AA12A85D1200007EFB8 /* MealsStatusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855F0AA02A85D1200007EFB8 /* MealsStatusData.swift */; };
 		8565301529F8BD340054DC4A /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8565301429F8BD340054DC4A /* .swiftlint.yml */; };
 		856C897D2A5126810054FE61 /* StudentIdCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856C897C2A5126810054FE61 /* StudentIdCard.swift */; };
+		8586D9132BFFA0040009A2DD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586D9122BFFA0040009A2DD /* API.swift */; };
 		8588874629CAA53100D0CDAA /* StudentIdCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8588874529CAA53100D0CDAA /* StudentIdCardVC.swift */; };
 		8588874C29CABCDD00D0CDAA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8588874B29CABCDD00D0CDAA /* Alamofire */; settings = {ATTRIBUTES = (Required, ); }; };
 		858A5B4529EE675D009ACE57 /* SignupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858A5B4429EE675D009ACE57 /* SignupData.swift */; };
-		859469422A98DEBD00F565E4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859469412A98DEBD00F565E4 /* UIViewController.swift */; };
+		859469422A98DEBD00F565E4 /* UIViewController + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859469412A98DEBD00F565E4 /* UIViewController + Ext.swift */; };
 		85963EEA29D5D65A0068EC3E /* LoginData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85963EE929D5D65A0068EC3E /* LoginData.swift */; };
-		859741D42A8EF7AA0069EAD6 /* Internal DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859741D32A8EF7AA0069EAD6 /* Internal DB.swift */; };
+		859741D42A8EF7AA0069EAD6 /* RegisterUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859741D32A8EF7AA0069EAD6 /* RegisterUserInfo.swift */; };
 		85BEC5A229D558F200B9948E /* StudentIdCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BEC5A129D558F200B9948E /* StudentIdCardView.swift */; };
 		85CB7E4A29E7F0B60078F2AB /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CB7E4929E7F0B60078F2AB /* Token.swift */; };
 		85CD64372A6437870003A357 /* MealStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD64362A6437870003A357 /* MealStatusView.swift */; };
@@ -52,7 +52,6 @@
 		8541419929C9A6C50063DF27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		854141AC29C9AE2B0063DF27 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		854141AF29C9AEA00063DF27 /* DataBase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataBase.xcdatamodel; sourceTree = "<group>"; };
-		854141B529CA83740063DF27 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		85482A2029CC4AA700F79893 /* SignupNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNameVC.swift; sourceTree = "<group>"; };
 		85482A2229CC4AFD00F79893 /* SignupIdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupIdVC.swift; sourceTree = "<group>"; };
 		85482A2429CC4B0D00F79893 /* SignupPwVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPwVC.swift; sourceTree = "<group>"; };
@@ -60,11 +59,12 @@
 		855F0AA02A85D1200007EFB8 /* MealsStatusData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsStatusData.swift; sourceTree = "<group>"; };
 		8565301429F8BD340054DC4A /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		856C897C2A5126810054FE61 /* StudentIdCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdCard.swift; sourceTree = "<group>"; };
+		8586D9122BFFA0040009A2DD /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8588874529CAA53100D0CDAA /* StudentIdCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdCardVC.swift; sourceTree = "<group>"; };
 		858A5B4429EE675D009ACE57 /* SignupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupData.swift; sourceTree = "<group>"; };
-		859469412A98DEBD00F565E4 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		859469412A98DEBD00F565E4 /* UIViewController + Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + Ext.swift"; sourceTree = "<group>"; };
 		85963EE929D5D65A0068EC3E /* LoginData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginData.swift; sourceTree = "<group>"; };
-		859741D32A8EF7AA0069EAD6 /* Internal DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Internal DB.swift"; sourceTree = "<group>"; };
+		859741D32A8EF7AA0069EAD6 /* RegisterUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserInfo.swift; sourceTree = "<group>"; };
 		85BEC5A129D558F200B9948E /* StudentIdCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentIdCardView.swift; sourceTree = "<group>"; };
 		85CB7E4929E7F0B60078F2AB /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		85CD64362A6437870003A357 /* MealStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealStatusView.swift; sourceTree = "<group>"; };
@@ -90,8 +90,15 @@
 		8507E5C029D4679C0094B7E1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				854141B129CA833A0063DF27 /* Extention */,
-				854141AA29C9AC4D0063DF27 /* Object */,
+				8534DC752A0A349D00699166 /* LetsEatingTimeDebug.entitlements */,
+				8507E5BD29D3FC230094B7E1 /* LetsEatingTime.entitlements */,
+				854141AE29C9AEA00063DF27 /* DataBase.xcdatamodeld */,
+				8541418B29C9A6C50063DF27 /* AppDelegate.swift */,
+				8541418D29C9A6C50063DF27 /* SceneDelegate.swift */,
+				8541419429C9A6C50063DF27 /* Assets.xcassets */,
+				8541419629C9A6C50063DF27 /* LaunchScreen.storyboard */,
+				8541419929C9A6C50063DF27 /* Info.plist */,
+				8586D9122BFFA0040009A2DD /* API.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -116,28 +123,19 @@
 		8541418A29C9A6C50063DF27 /* LetsEatingTime */ = {
 			isa = PBXGroup;
 			children = (
-				8534DC752A0A349D00699166 /* LetsEatingTimeDebug.entitlements */,
-				8507E5BD29D3FC230094B7E1 /* LetsEatingTime.entitlements */,
-				854141AE29C9AEA00063DF27 /* DataBase.xcdatamodeld */,
-				8541418B29C9A6C50063DF27 /* AppDelegate.swift */,
-				8541418D29C9A6C50063DF27 /* SceneDelegate.swift */,
-				8541419429C9A6C50063DF27 /* Assets.xcassets */,
-				8541419629C9A6C50063DF27 /* LaunchScreen.storyboard */,
-				8541419929C9A6C50063DF27 /* Info.plist */,
 				8507E5C029D4679C0094B7E1 /* Resources */,
 				85482A2929CC4BB100F79893 /* Sources */,
 			);
 			path = LetsEatingTime;
 			sourceTree = "<group>";
 		};
-		854141AA29C9AC4D0063DF27 /* Object */ = {
+		854141AA29C9AC4D0063DF27 /* InternalDB */ = {
 			isa = PBXGroup;
 			children = (
-				854141B529CA83740063DF27 /* API.swift */,
 				85CB7E4929E7F0B60078F2AB /* Token.swift */,
-				859741D32A8EF7AA0069EAD6 /* Internal DB.swift */,
+				859741D32A8EF7AA0069EAD6 /* RegisterUserInfo.swift */,
 			);
-			path = Object;
+			path = InternalDB;
 			sourceTree = "<group>";
 		};
 		854141AB29C9AD780063DF27 /* login */ = {
@@ -151,7 +149,7 @@
 		854141B129CA833A0063DF27 /* Extention */ = {
 			isa = PBXGroup;
 			children = (
-				859469412A98DEBD00F565E4 /* UIViewController.swift */,
+				859469412A98DEBD00F565E4 /* UIViewController + Ext.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -168,6 +166,8 @@
 		85482A2929CC4BB100F79893 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				854141B129CA833A0063DF27 /* Extention */,
+				854141AA29C9AC4D0063DF27 /* InternalDB */,
 				85E292CE29D3D3520054E012 /* Model */,
 				85482A2A29CC4BF400F79893 /* ViewController */,
 			);
@@ -324,7 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				854141B629CA83740063DF27 /* API.swift in Sources */,
+				8586D9132BFFA0040009A2DD /* API.swift in Sources */,
 				8541419029C9A6C50063DF27 /* SigninVC.swift in Sources */,
 				854141AD29C9AE2B0063DF27 /* SignupVC.swift in Sources */,
 				85482A2129CC4AA700F79893 /* SignupNameVC.swift in Sources */,
@@ -336,13 +336,13 @@
 				8541418C29C9A6C50063DF27 /* AppDelegate.swift in Sources */,
 				85CB7E4A29E7F0B60078F2AB /* Token.swift in Sources */,
 				850960E929DE9F6000B16E87 /* MealsData.swift in Sources */,
-				859469422A98DEBD00F565E4 /* UIViewController.swift in Sources */,
+				859469422A98DEBD00F565E4 /* UIViewController + Ext.swift in Sources */,
 				858A5B4529EE675D009ACE57 /* SignupData.swift in Sources */,
 				85BEC5A229D558F200B9948E /* StudentIdCardView.swift in Sources */,
 				8541418E29C9A6C50063DF27 /* SceneDelegate.swift in Sources */,
 				85E292D029D3D45B0054E012 /* StudentShowMealsView.swift in Sources */,
 				856C897D2A5126810054FE61 /* StudentIdCard.swift in Sources */,
-				859741D42A8EF7AA0069EAD6 /* Internal DB.swift in Sources */,
+				859741D42A8EF7AA0069EAD6 /* RegisterUserInfo.swift in Sources */,
 				85482A2529CC4B0D00F79893 /* SignupPwVC.swift in Sources */,
 				8588874629CAA53100D0CDAA /* StudentIdCardVC.swift in Sources */,
 				85963EEA29D5D65A0068EC3E /* LoginData.swift in Sources */,
@@ -482,12 +482,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = LetsEatingTime/LetsEatingTimeDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XCQRCQ3RAB;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LetsEatingTime/Info.plist;
+				INFOPLIST_FILE = LetsEatingTime/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -513,9 +514,10 @@
 				CODE_SIGN_ENTITLEMENTS = LetsEatingTime/LetsEatingTime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W7X5HRD463;
+				DEVELOPMENT_TEAM = 782M695PY5;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LetsEatingTime/Info.plist;
+				INFOPLIST_FILE = LetsEatingTime/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -1,5 +1,5 @@
 //
-//  UIViewController.swift
+//  UIViewController + Ext.swift
 //  LetsEatingTime
 //
 //  Created by 최시훈 on 2023/08/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension UIViewController {
+extension UIViewController {
     func showAlert(
         title: String?,
         message: String,

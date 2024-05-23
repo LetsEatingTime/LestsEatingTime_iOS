@@ -30,12 +30,12 @@ class StudentIdCardView: UIView {
         $0.image = UIImage(named: "LeeChanHuk")
     }
     let studentIdCardNameLabel = UILabel().then {
-        $0.text = "세계 최강 최시훈"
+        $0.text = "최시훈"
         $0.font = .systemFont(ofSize: 36, weight: .semibold)
         $0.textAlignment = .center
     }
     let studentIdCardGradeLabel = UILabel().then {
-        $0.text = "1학년 1반 17번"
+        $0.text = "1학년 1반 11번호"
         $0.font = .systemFont(ofSize: 30, weight: .medium)
         $0.textAlignment = .center
     }

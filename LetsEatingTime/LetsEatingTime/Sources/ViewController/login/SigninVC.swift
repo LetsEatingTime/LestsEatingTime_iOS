@@ -13,7 +13,6 @@ import Alamofire
 class SigninVC: UIViewController {
     
     let logoImage = UILabel().then {
-        //        $0.image = (UIImage(named: ""))
         $0.text = "레츠이팅타임"
         $0.font = .systemFont(ofSize: 40, weight: .bold)
         $0.textAlignment = .center
@@ -47,45 +46,47 @@ class SigninVC: UIViewController {
         $0.layer.cornerRadius = 20
         $0.addTarget(self, action: #selector(didPressSigninBt), for: .touchUpInside)
     }
+    
     let eatingFoodImage = UIImageView().then {
         $0.image = UIImage(named: "EatingFoodImage")
     }
-    let checkedImage = UIImage(systemName: "checkmark.square.fill")
-    let uncheckedImage = UIImage(systemName: "square")
-    lazy var refreshCheckBoxButton = UIButton(type: .system).then {
-        $0.setImage(uncheckedImage, for: .normal)
-        $0.addTarget(self, action: #selector(checkBoxTapped(_:)), for: .touchUpInside)
-    }
+    
     let findId = UIButton().then {
         $0.setTitle("아이디 찾기", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         $0.addTarget(self, action: #selector(didTabfindId), for: .touchUpInside)
     }
+    
     let findView = UIView().then {
         $0.backgroundColor = .black
     }
+    
     let findPW = UIButton().then {
         $0.setTitleColor(.black, for: .normal)
         $0.setTitle("비밀번호 찾기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         $0.addTarget(self, action: #selector(didTabfindPW), for: .touchUpInside)
     }
+    
     let findView2 = UIView().then {
         $0.backgroundColor = .black
     }
+    
     let signupButton = UIButton().then {
         $0.setTitle("회원가입", for: .normal)
         $0.setTitleColor(.black, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         $0.addTarget(self, action: #selector(didPressGoTosignupButton), for: .touchUpInside)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setup()
-//        chackToken()
+        //        chackToken()
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -94,21 +95,16 @@ extension SigninVC {
     @objc func didTabfindId() {
         self.showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
     }
+    
     @objc func didTabfindPW() {
         self.showAlert(title: "2-2반", message: "최시훈한테 찾아오시면 알려드립니다.")
     }
-    @objc func checkBoxTapped(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        if sender.isSelected {
-            sender.setImage(checkedImage, for: .normal)
-        } else {
-            sender.setImage(uncheckedImage, for: .normal)
-        }
-    }
+    
     func enterTestData() {
         idTextField.text = "tank6210"
         pwTextField.text = "bksa2354!@#$"
     }
+    
     @objc func didPressSigninBt() {
         enterTestData()
         let idText = idTextField.text!
@@ -127,22 +123,24 @@ extension SigninVC {
         .responseDecodable(of: Token.self) { response in
             switch response.result {
             case.success(let value):
-                GetId.save(.id, idText)
+                RegisterUserInfoManager.save(.id, idText)
                 TokenManager.save(.grantType, value.data.grantType)
-                    TokenManager.save(.refreshToken, value.data.refreshToken)
-                    TokenManager.save(.accessToken, value.data.accessToken)
-                    self.present()
+                TokenManager.save(.refreshToken, value.data.refreshToken)
+                TokenManager.save(.accessToken, value.data.accessToken)
+                self.present()
             case.failure(let error):
-//                    showAlert(title: "경고⚠️ \(error._code)", message: "\(error.localizedDescription)")
-                    print(error.localizedDescription)
-                }
+                print(error.localizedDescription)
+                self.showAlert(title: "경고⚠️", message: "서버에 문제가 생겼어요!\n관리자에게 문의해주세요.")
+            }
         }
     }
+    
     @objc func didPressGoTosignupButton() {
         let viewController = SignupVC()
         present(viewController, animated: true)
     }
 }
+
 extension SigninVC {
     func setup() {
         [
@@ -210,21 +208,16 @@ extension SigninVC {
             $0.left.equalTo(findPW.snp.right).offset(20)
             $0.top.equalTo(signinButton.snp.bottom).offset(20)
         }
-        //        refreshCheckBoxButton.snp.makeConstraints {
-        //            $0.top.equalTo(eatingFoodImage.snp.bottom).offset(-367)
-        //            $0.bottom.equalToSuperview().offset(47)
-        //            $0.left.equalToSuperview().offset(0)
-        //            $0.right.equalToSuperview().offset(20)
-        //        }
     }
+    
     func present() {
         let viewController = StudentIdCardVC()
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
     }
-
+    
     func chackToken() {
-                AF.request("\(api)/account/login.do",
+        AF.request("\(api)/account/login.do",
                    method: .post,
                    headers: ["Authorization": "\(TokenManager.get(.grantType)!) \(TokenManager.get(.accessToken)!)"]
         )
@@ -238,7 +231,7 @@ extension SigninVC {
                 self.present()
             case .failure(let error):
                 print("로그인 다시하셈 ㅅㄱ\(error._code) \(error.localizedDescription)")
-
+                
             }
         }
     }

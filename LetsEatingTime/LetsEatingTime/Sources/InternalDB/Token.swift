@@ -11,6 +11,7 @@ struct Token: Codable {
     let status: Int
     let data: Tokens
 }
+
 struct Tokens: Codable {
     var grantType: String
     var accessToken: String
@@ -22,6 +23,7 @@ enum TokenType {
     case accessToken
     case refreshToken
 }
+
 class TokenManager {
     static func save(_ tokenType: TokenType, _ value: String) {
         UserDefaults.standard.set(value, forKey: String(describing: tokenType))
